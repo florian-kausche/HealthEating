@@ -6,12 +6,25 @@
     <title>HealthyEating Meal Planning</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="loader.css">
 </head>
-<body>
+<body class="no-scroll">
+    <div class="loader-overlay" id="loader-overlay">
+        <div class="loader">
+            <div class="loader-item loader-item_1"></div>
+            <div class="loader-item loader-item_2"></div>
+            <div class="loader-item loader-item_3"></div>
+            <div class="loader-item loader-item_4"></div>
+        </div>
+    </div>
+    <div class="content-wrapper" id="content-wrapper">
     <header class="main-header">
         <div class="container header-flex">
             <div class="logo">
-                <img src="image/Healthyeating-logo.png" alt="Healthy Eating Logo" class="logo-img">                <span>HEALTHYEATING</span>
+                <a href="index.html">
+                    <img src="image/Healthyeating-logo.png" alt="HealthyEating Logo" class="logo-img">
+                    <span>HealthyEating</span>
+                </a>
             </div>
             <button class="hamburger" aria-label="Open menu">
                 <span></span>
@@ -289,5 +302,17 @@
     <script type="module" src="ai-suggestions.js"></script>
     <script type="module" src="planner.js"></script>
     <script type="module" src="spoonacular.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            const loaderOverlay = document.getElementById('loader-overlay');
+            const contentWrapper = document.getElementById('content-wrapper');
+            const body = document.body;
+
+            loaderOverlay.classList.add('hidden');
+            contentWrapper.classList.add('loaded');
+            body.classList.remove('no-scroll');
+        });
+    </script>
+</div>
 </body>
 </html>
