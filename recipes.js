@@ -65,7 +65,7 @@ class RecipeSearch {
             const params = new URLSearchParams({
                 query: this.currentQuery,
                 offset: this.currentOffset,
-                number: 12,
+                number: 30,
                 diet: diet,
                 type: mealType,
                 addRecipeInformation: true,

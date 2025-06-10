@@ -1,6 +1,6 @@
 // Spoonacular API key and base URL
 const SPOONACULAR_API_KEY = 'd8c52d2dfd2a4f30bcb00f420d008ee4';
-const SPOONACULAR_BASE_URL = 'https://spoonacular.com/';
+const SPOONACULAR_BASE_URL = 'https://api.spoonacular.com/';
 
 const searchForm = document.getElementById('recipe-search-form');
 const searchInput = document.getElementById('recipe-search-input');
@@ -96,3 +96,133 @@ loadMoreBtn.addEventListener('click', async () => {
 // Optional: trigger search on filter change
 dietFilter.addEventListener('change', handleSearch);
 mealTypeFilter.addEventListener('change', handleSearch);
+
+/**
+ * Searches for recipes based on various parameters
+ */
+export async function searchRecipes(params) {
+    const { query, diet, cuisine, maxReadyTime, intolerances, offset = 0, number = 10 } = params;
+    
+    const url = new URL(`${SPOONACULAR_BASE_URL}recipes/complexSearch`);
+    url.searchParams.append('apiKey', SPOONACULAR_API_KEY);
+    url.searchParams.append('query', query);
+    url.searchParams.append('number', number);
+    url.searchParams.append('offset', offset);
+    url.searchParams.append('addRecipeInformation', true);
+    url.searchParams.append('fillIngredients', true);
+    url.searchParams.append('addRecipeNutrition', true);
+
+    if (diet) url.searchParams.append('diet', diet);
+    if (cuisine) url.searchParams.append('cuisine', cuisine);
+    if (maxReadyTime) url.searchParams.append('maxReadyTime', maxReadyTime);
+    if (intolerances) url.searchParams.append('intolerances', intolerances);
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error searching recipes:', error);
+        throw error;
+    }
+}
+
+/**
+ * Gets detailed information about a specific recipe
+ */
+export async function getRecipeDetails(recipeId) {
+    const url = `${SPOONACULAR_BASE_URL}recipes/${recipeId}/information?apiKey=${SPOONACULAR_API_KEY}`;
+    
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching recipe details:', error);
+        throw error;
+    }
+}
+
+/**
+ * Generates a meal plan
+ */
+export async function generateMealPlan(params) {
+    const { timeFrame, targetCalories, diet, exclude } = params;
+    
+    const url = new URL(`${SPOONACULAR_BASE_URL}mealplanner/generate`);
+    url.searchParams.append('apiKey', SPOONACULAR_API_KEY);
+    url.searchParams.append('timeFrame', timeFrame);
+    
+    if (targetCalories) url.searchParams.append('targetCalories', targetCalories);
+    if (diet) url.searchParams.append('diet', diet);
+    if (exclude) url.searchParams.append('exclude', exclude);
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error generating meal plan:', error);
+        throw error;
+    }
+}
+
+/**
+ * Adds a recipe to the meal plan
+ */
+export async function addToMealPlan(recipeId, date, mealType) {
+    const url = `${SPOONACULAR_BASE_URL}mealplanner/add`;
+    const data = {
+        date: date,
+        slot: mealType,
+        position: 0,
+        type: 'RECIPE',
+        value: {
+            id: recipeId,
+            servings: 1
+        }
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': SPOONACULAR_API_KEY
+            },
+            body: JSON.stringify(data)
+        });
+        
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error adding recipe to meal plan:', error);
+        throw error;
+    }
+}
+
+/**
+ * Gets the meal plan for a specific date range
+ */
+export async function getMealPlan(startDate, endDate) {
+    const url = `${SPOONACULAR_BASE_URL}mealplanner/${startDate}/${endDate}?apiKey=${SPOONACULAR_API_KEY}`;
+    
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching meal plan:', error);
+        throw error;
+    }
+}

@@ -119,6 +119,7 @@ class MealPlanner {
         this.aiSuggestions = new AISuggestions();
         this.setupPlanner();
         this.setupAISuggestions();
+        this.setupRecipeSearch();
     }
 
     setupPlanner() {
@@ -375,7 +376,9 @@ class MealPlanner {
         `).join('');
 
         this.initializeDragAndDrop();
-    }    createMealCard(meal) {
+    }
+
+    createMealCard(meal) {
         const isFavorite = this.favorites.includes(meal.id);
         return `
             <div class="meal-card" 
@@ -546,6 +549,192 @@ class MealPlanner {
             };
         });
         return plan;
+    }
+
+    setupRecipeSearch() {
+        const searchForm = document.getElementById('recipe-search-form');
+        if (searchForm) {
+            searchForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const searchInput = document.getElementById('recipe-search');
+                const query = searchInput.value.trim();
+                
+                if (query) {
+                    try {
+                        const recipes = await searchRecipes({ query });
+                        this.displayRecipeResults(recipes);
+                    } catch (error) {
+                        console.error('Error searching recipes:', error);
+                        this.showFeedback('Failed to search recipes. Please try again.');
+                    }
+                }
+            });
+        }
+    }
+
+    displayRecipeResults(recipes) {
+        const resultsContainer = document.getElementById('recipe-results');
+        if (!resultsContainer) return;
+
+        resultsContainer.innerHTML = '';
+        
+        if (!recipes || recipes.length === 0) {
+            resultsContainer.innerHTML = '<p class="no-results">No recipes found. Try a different search term.</p>';
+            return;
+        }
+
+        recipes.forEach(recipe => {
+            const recipeCard = this.createRecipeCard(recipe);
+            resultsContainer.appendChild(recipeCard);
+        });
+    }
+
+    createRecipeCard(recipe) {
+        const card = document.createElement('div');
+        card.className = 'recipe-card';
+        card.draggable = true;
+        card.dataset.recipeId = recipe.id;
+        
+        card.innerHTML = `
+            <img src="${recipe.image}" alt="${recipe.title}" class="recipe-image">
+            <div class="recipe-info">
+                <h3>${recipe.title}</h3>
+                <p class="recipe-meta">
+                    <span><i class="fas fa-clock"></i> ${recipe.readyInMinutes} mins</span>
+                    <span><i class="fas fa-fire"></i> ${recipe.calories || 'N/A'} cal</span>
+                </p>
+                <div class="recipe-actions">
+                    <button class="view-recipe-btn" onclick="event.stopPropagation(); this.viewRecipeDetails(${recipe.id})">
+                        <i class="fas fa-utensils"></i> View Recipe
+                    </button>
+                    <button class="add-to-plan-btn" onclick="event.stopPropagation(); this.addToPlan(${recipe.id})">
+                        <i class="fas fa-plus"></i> Add to Plan
+                    </button>
+                </div>
+            </div>
+        `;
+
+        // Add drag and drop functionality
+        card.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', recipe.id);
+            card.classList.add('dragging');
+        });
+
+        card.addEventListener('dragend', () => {
+            card.classList.remove('dragging');
+        });
+
+        return card;
+    }
+
+    async viewRecipeDetails(recipeId) {
+        try {
+            const recipe = await getRecipeDetails(recipeId);
+            // Show recipe details in a modal
+            const modal = document.createElement('div');
+            modal.className = 'modal-bg';
+            modal.innerHTML = `
+                <div class="modal-content recipe-detail-modal">
+                    <span class="close-modal">&times;</span>
+                    <h2>${recipe.title}</h2>
+                    <img src="${recipe.image}" alt="${recipe.title}" class="recipe-detail-image">
+                    <div class="recipe-detail-info">
+                        <p><strong>Ready in:</strong> ${recipe.readyInMinutes} minutes</p>
+                        <p><strong>Servings:</strong> ${recipe.servings}</p>
+                        <h3>Ingredients:</h3>
+                        <ul>
+                            ${recipe.extendedIngredients.map(ing => `<li>${ing.original}</li>`).join('')}
+                        </ul>
+                        <h3>Instructions:</h3>
+                        <ol>
+                            ${recipe.analyzedInstructions[0]?.steps.map(step => `<li>${step.step}</li>`).join('') || 'No instructions available'}
+                        </ol>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            // Close modal functionality
+            modal.querySelector('.close-modal').onclick = () => modal.remove();
+            modal.onclick = (e) => {
+                if (e.target === modal) modal.remove();
+            };
+        } catch (error) {
+            console.error('Error fetching recipe details:', error);
+            this.showFeedback('Failed to load recipe details. Please try again.');
+        }
+    }
+
+    async addToPlan(recipeId) {
+        try {
+            const recipe = await getRecipeDetails(recipeId);
+            // Show meal type selection modal
+            const modal = document.createElement('div');
+            modal.className = 'modal-bg';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h3>Add to Meal Plan</h3>
+                    <p>Select meal type and day:</p>
+                    <form id="add-to-plan-form">
+                        <div class="form-group">
+                            <label for="meal-type">Meal Type:</label>
+                            <select id="meal-type" required>
+                                <option value="breakfast">Breakfast</option>
+                                <option value="lunch">Lunch</option>
+                                <option value="dinner">Dinner</option>
+                                <option value="snacks">Snacks</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="day">Day:</label>
+                            <select id="day" required>
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday">Friday</option>
+                                <option value="Saturday">Saturday</option>
+                                <option value="Sunday">Sunday</option>
+                            </select>
+                        </div>
+                        <button type="submit">Add to Plan</button>
+                    </form>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            // Handle form submission
+            modal.querySelector('form').onsubmit = (e) => {
+                e.preventDefault();
+                const mealType = modal.querySelector('#meal-type').value;
+                const day = modal.querySelector('#day').value;
+                
+                // Add recipe to plan
+                const mealCell = document.querySelector(`[data-day="${day}"][data-meal-type="${mealType}"]`);
+                if (mealCell) {
+                    const mealElement = document.createElement('div');
+                    mealElement.className = 'meal-item';
+                    mealElement.innerHTML = `
+                        <h4>${recipe.title}</h4>
+                        <p>Ready in ${recipe.readyInMinutes} minutes</p>
+                        <p>Calories: ${recipe.calories || 'N/A'}</p>
+                    `;
+                    mealCell.appendChild(mealElement);
+                    this.showFeedback('Recipe added to meal plan!');
+                }
+                modal.remove();
+            };
+
+            // Close modal functionality
+            modal.querySelector('.close-modal').onclick = () => modal.remove();
+            modal.onclick = (e) => {
+                if (e.target === modal) modal.remove();
+            };
+        } catch (error) {
+            console.error('Error adding recipe to plan:', error);
+            this.showFeedback('Failed to add recipe to plan. Please try again.');
+        }
     }
 }
 

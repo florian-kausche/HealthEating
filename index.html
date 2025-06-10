@@ -162,46 +162,99 @@
             <button class="cta" id="popup-cta">Try AI Recipes</button>
         </div>
     </div>
-    <section id="recipe-search" class="section">
+    <section id="recipe-search" class="recipe-discovery-section">
         <div class="container">
-            <h2 class="section-title">Discover Healthy Recipes</h2>
-            <div class="search-wrapper">
+            <div class="section-header">
+                <h2 class="section-title">Discover Healthy Recipes</h2>
+                <p class="section-subtitle">Find delicious, nutritious meals tailored to your preferences</p>
+            </div>
+            
+            <div class="search-container">
                 <form id="recipe-search-form" class="search-form">
                     <div class="search-input-group">
-                        <input type="text" id="recipe-search-input" 
-                               placeholder="Search recipes (e.g., 'vegetarian pasta')" required>
+                        <div class="search-field">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="text" id="recipe-search-input" 
+                                   placeholder="What would you like to cook today?"
+                                   class="search-input">
+                        </div>
                         <button type="submit" class="search-submit">
-                            <i class="fas fa-search"></i> Search
+                            Find Recipes
                         </button>
                     </div>
+                    
                     <div class="search-filters">
-                        <select id="diet-filter">
-                            <option value="">All Diets</option>
-                            <option value="meat-eater">Meat Lover</option>
-                            <option value="vegan">Vegan</option>
-                            <option value="gluten-free">Gluten Free</option>
-                            <option value="paleo">Paleo</option>
-                        </select>
-                        <select id="meal-type-filter">
-                            <option value="">All Meals</option>
-                            <option value="breakfast">Breakfast</option>
-                            <option value="main course">Main Course</option>
-                            <option value="salad">Salad</option>
-                            <option value="dessert">Dessert</option>
-                        </select>
+                        <div class="filter-group">
+                            <label for="diet-filter">
+                                <i class="fas fa-utensils"></i> Diet Type
+                            </label>
+                            <select id="diet-filter" class="filter-select">
+                                <option value="">All Diets</option>
+                                <option value="vegetarian">Vegetarian</option>
+                                <option value="vegan">Vegan</option>
+                                <option value="gluten-free">Gluten Free</option>
+                                <option value="paleo">Paleo</option>
+                                <option value="keto">Keto</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="meal-type-filter">
+                                <i class="fas fa-clock"></i> Meal Type
+                            </label>
+                            <select id="meal-type-filter" class="filter-select">
+                                <option value="">All Meals</option>
+                                <option value="breakfast">Breakfast</option>
+                                <option value="lunch">Lunch</option>
+                                <option value="dinner">Dinner</option>
+                                <option value="snacks">Snacks</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="cuisine-filter">
+                                <i class="fas fa-globe"></i> Cuisine
+                            </label>
+                            <select id="cuisine-filter" class="filter-select">
+                                <option value="">All Cuisines</option>
+                                <option value="african">African</option>
+                                <option value="mediterranean">Mediterranean</option>
+                                <option value="asian">Asian</option>
+                                <option value="european">European</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="time-filter">
+                                <i class="fas fa-hourglass-half"></i> Max Time
+                            </label>
+                            <select id="time-filter" class="filter-select">
+                                <option value="">Any Time</option>
+                                <option value="15">15 minutes</option>
+                                <option value="30">30 minutes</option>
+                                <option value="45">45 minutes</option>
+                                <option value="60">1 hour</option>
+                            </select>
+                        </div>
                     </div>
                 </form>
             </div>
 
-            <div id="search-status" class="search-status"></div>
+            <div id="search-status" class="search-status">
+                <div class="status-message"></div>
+                <div class="status-icon"></div>
+            </div>
             
             <div id="recipes-results" class="recipes-grid"></div>
             
             <div class="load-more-wrapper">
                 <button id="load-more-btn" class="load-more-btn" style="display: none;">
-                    Load More Recipes
+                    <i class="fas fa-plus"></i> Load More Recipes
                 </button>
-                <div id="loading-spinner" class="loading-spinner" style="display: none;"></div>
+                <div id="loading-spinner" class="loading-spinner" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span>Finding more recipes...</span>
+                </div>
             </div>
         </div>
     </section>
