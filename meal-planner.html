@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Planner - Healthy Eating</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Meal Planner</h1>
+        </header>
+
+        <main>
+            <section class="meal-planning-section">
+                <h2>Generate Meal Plan</h2>
+                <form id="meal-plan-form">
+                    <div class="form-group">
+                        <label for="time-frame">Time Frame:</label>
+                        <select id="time-frame" name="time-frame">
+                            <option value="day">Daily</option>
+                            <option value="week">Weekly</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="target-calories">Target Calories:</label>
+                        <input type="number" id="target-calories" name="target-calories" value="2000" min="1000" max="4000">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="diet">Diet Type:</label>
+                        <select id="diet" name="diet">
+                            <option value="">None</option>
+                            <option value="vegetarian">Vegetarian</option>
+                            <option value="vegan">Vegan</option>
+                            <option value="gluten-free">Gluten Free</option>
+                            <option value="ketogenic">Ketogenic</option>
+                            <option value="paleo">Paleo</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exclude">Exclude Ingredients:</label>
+                        <input type="text" id="exclude" name="exclude" placeholder="e.g., nuts, shellfish">
+                    </div>
+
+                    <button type="submit" class="btn-primary">Generate Meal Plan</button>
+                </form>
+            </section>
+
+            <section class="meal-plan-display">
+                <h2>Your Meal Plan</h2>
+                <div id="meal-plan-container" class="meal-plan-grid"></div>
+            </section>
+
+            <section class="recipe-search-section">
+                <h2>Search Recipes</h2>
+                <form id="recipe-search-form">
+                    <div class="form-group">
+                        <input type="text" id="recipe-search" name="recipe-search" placeholder="Search for recipes...">
+                        <button type="submit" class="btn-primary">Search</button>
+                    </div>
+                </form>
+                <div id="recipe-results" class="recipe-grid"></div>
+            </section>
+
+            <section class="recipe-details-section">
+                <div id="recipe-details"></div>
+            </section>
+        </main>
+    </div>
+
+    <script type="module">
+        import { generateMealPlan, searchRecipes, displayMealPlan, displayRecipeResults, viewRecipe } from './spoonacular.js';
+
+        // Handle meal plan form submission
+        document.getElementById('meal-plan-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const timeFrame = document.getElementById('time-frame').value;
+            const targetCalories = document.getElementById('target-calories').value;
+            const diet = document.getElementById('diet').value;
+            const exclude = document.getElementById('exclude').value;
+
+            try {
+                const mealPlan = await generateMealPlan(timeFrame, targetCalories, diet, exclude);
+                displayMealPlan(mealPlan);
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to generate meal plan. Please try again.');
+            }
+        });
+
+        // Handle recipe search form submission
+        document.getElementById('recipe-search-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const query = document.getElementById('recipe-search').value;
+
+            try {
+                const recipes = await searchRecipes(query);
+                displayRecipeResults(recipes);
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to search recipes. Please try again.');
+            }
+        });
+
+        // Make viewRecipe function available globally
+        window.viewRecipe = viewRecipe;
+    </script>
+</body>
+</html> 

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthyEating Meal Planning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container header-flex">
+            <div class="logo">
+                <img src="image/Healthyeating-logo.png" alt="Healthy Eating Logo" class="logo-img">                <span>HEALTHYEATING</span>
+            </div>
+            <button class="hamburger" aria-label="Open menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#testimonial" class="nav-link">Testimonials</a>
+                <a href="#customize" class="nav-link">Customize</a>
+                <a href="#kids" class="nav-link">Kids</a>
+                <a href="login.html" class="nav-link sign-in" id="sign-in-btn">Sign In</a>
+                <a href="signup.html" class="nav-link sign-up" id="sign-up-btn">Sign Up</a>
+            </nav>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="container hero-flex">
+            <div class="hero-text">
+                <h1>Healthy, Homemade Meals Made Easy</h1>
+                <p class="hero-sub">Meal planning, recipes, and grocery lists tailored for you and your family.</p>
+                <div class="app-buttons">
+                    <a href="#" class="app-store">App Store</a>
+                    <a href="#" class="google-play">Google Play</a>
+                </div>
+                <button class="cta" id="hero-signup">Get Started Free</button>
+            </div>
+            <div class="hero-image">
+                <img src="image/why-cooking-and-eating-together.jpg" alt="People cooking together">
+            </div>
+        </div>
+    </section>
+    <section class="video-showcase">
+        <div class="container">
+            <h2>Watch & Learn</h2>
+            <div class="video-grid">
+                <div class="video-card main-video">                    <div class="video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/AdNVlD5q8TA" 
+                            title="Meal Planning Tips" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <h3>Smart Meal Planning Tips</h3>
+                    <p>Learn how to plan your meals efficiently and save time in the kitchen</p>
+                </div>
+                <div class="video-card">                    <div class="video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/SWcoL5gjuKY" 
+                            title="African Recipes" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <h3>Traditional African Recipes</h3>
+                    <p>Discover delicious and healthy African cuisine</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="about" id="about">
+        <div class="container about-flex">
+            <div class="about-img">
+                <img src="image/African-Cooking.png" alt="African Cooking" />
+            </div>
+            <div class="about-text">
+                <h2>About HealthyEating</h2>
+                <p>HealthyEating is your all-in-one meal planning service. We help you plan weekly meals, learn to cook, explore new recipes, and eat healthier at home. Our platform is designed to make home cooking simple, enjoyable, and stress-free for everyone.</p>
+                <div class="lifehacker-badge">Voted #1 by Lifehacker</div>
+            </div>
+        </div>
+    </section>
+    <section class="features" id="features">
+        <div class="container features-flex">
+            <div class="features-text">
+                <h2>Features</h2>
+                <ul class="feature-list">
+                    <li>Weekly meal plans with customizable options</li>
+                    <li>1-click grocery lists for easy shopping</li>
+                    <li>Step-by-step cooking instructions</li>
+                    <li>Dietary filters: Paleo, Vegetarian, Gluten-Free, and more</li>
+                    <li>Mobile-friendly and easy to use</li>
+                </ul>
+                <button class="cta">Start Free Trial</button>
+            </div>
+            <div class="features-image">
+                <img src="image/phone1.webp" alt="App screenshot 1">
+                <img src="image/phone2.webp" alt="App screenshot 2" style="margin-left:10px;">
+                <img src="image/phone3.webp" alt="App screenshot 3" style="margin-left:10px;">
+            </div>
+        </div>
+    </section>
+    <section class="testimonial" id="testimonial">
+        <div class="container testimonial-flex">
+            <div class="testimonial-img">
+                <img src="image/salad.jpg" alt="Salad" />
+            </div>
+            <div class="testimonial-text">
+                <h2>What Our Users Say</h2>
+                <blockquote>
+                    "Just renewed for another year. Thanks for taking dinner planning off my plate. I honestly don't know what I'd do without you anymore."
+                    <span>- Rebecca A.</span>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+    <section class="customize" id="customize">
+        <div class="container customize-flex">
+            <div class="customize-image">
+                <img src="image/fruits-vegi.jpg" alt="Meal options">
+                <img src="image/multivege.webp" alt="Vegetable options" style="margin-left:10px;max-width:120px;">
+            </div>
+            <div class="customize-text">
+                <h2>Personalize Your Meals</h2>
+                <p>Filter recipes by ingredient, portion, or occasion. Choose from a variety of diet options and serving sizes to fit your lifestyle and preferences.</p>
+                <button class="cta">Cook More Today</button>
+            </div>
+        </div>
+    </section>
+    <section class="kids" id="kids">
+        <div class="container kids-flex">
+            <div class="kids-img">
+                <img src="image/mixedfruit.jpg" alt="Kids eating healthy" />
+            </div>
+            <div class="kids-text">
+                <h2>Kids Are Eating Better</h2>
+                <blockquote>
+                    "I have grown so much as a cook and my kids now have such an adventurous palate thanks to HealthyEating. I can't express how great it has been."
+                    <span>- Matt R.</span>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+    <section class="products" id="products">
+        <div class="container">
+            <h2>Featured Healthy Products</h2>
+            <div id="product-list" class="product-list"></div>
+        </div>
+    </section>    <div id="popup" class="popup">
+        <div class="popup-content">
+            <button class="close-popup" id="close-popup-btn">&times;</button>
+            <h4>Discover AI-Powered Recipes!</h4>
+            <p>Get personalized recipe recommendations powered by AI. Plan your meals, discover new dishes, and cook with confidence!</p>
+            <button class="cta" id="popup-cta">Try AI Recipes</button>
+        </div>
+    </div>
+    <section id="recipe-search" class="section">
+        <div class="container">
+            <h2 class="section-title">Discover Healthy Recipes</h2>
+            <div class="search-wrapper">
+                <form id="recipe-search-form" class="search-form">
+                    <div class="search-input-group">
+                        <input type="text" id="recipe-search-input" 
+                               placeholder="Search recipes (e.g., 'vegetarian pasta')" required>
+                        <button type="submit" class="search-submit">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                    <div class="search-filters">
+                        <select id="diet-filter">
+                            <option value="">All Diets</option>
+                            <option value="meat-eater">Meat Lover</option>
+                            <option value="vegan">Vegan</option>
+                            <option value="gluten-free">Gluten Free</option>
+                            <option value="paleo">Paleo</option>
+                        </select>
+                        <select id="meal-type-filter">
+                            <option value="">All Meals</option>
+                            <option value="breakfast">Breakfast</option>
+                            <option value="main course">Main Course</option>
+                            <option value="salad">Salad</option>
+                            <option value="dessert">Dessert</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <div id="search-status" class="search-status"></div>
+            
+            <div id="recipes-results" class="recipes-grid"></div>
+            
+            <div class="load-more-wrapper">
+                <button id="load-more-btn" class="load-more-btn" style="display: none;">
+                    Load More Recipes
+                </button>
+                <div id="loading-spinner" class="loading-spinner" style="display: none;"></div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container footer-flex">
+            <div>
+                <h5>Easy & Fast Recipes</h5>
+                <h5>Learn Cooking Skills</h5>
+                <h5>Try Foods from Around the World</h5>
+            </div>
+            <div>
+                <h5>HealthyEating Members</h5>
+                <h5>Meal Planning at Home</h5>
+            </div>
+            <div class="footer-social">
+    <a href="https://web.facebook.com/florian.kausche.31/" target="_blank" title="Facebook" aria-label="Facebook">
+        <img src="social-media/10464407.png" alt="Facebook" class="social-icon">
+    </a>
+    <a href="https://wa.me/233207074372" target="_blank" title="WhatsApp" aria-label="WhatsApp">
+        <img src="social-media/410199-PD37U2-851.jpg" alt="WhatsApp" class="social-icon">
+    </a>
+    <a href="https://instagram.com" target="_blank" title="Instagram" aria-label="Instagram">
+        <img src="social-media/v982-d3-04.jpg" alt="Instagram" class="social-icon">
+    </a>
+</div>
+        </div>
+        <div class="container copyright">
+            &copy; 2025 HealthyEating
+        </div>
+    </footer>    <script type="module" src="script.js"></script>
+    <script type="module" src="login.js"></script>
+    <script type="module" src="ai-suggestions.js"></script>
+    <script type="module" src="planner.js"></script>
+    <script type="module" src="spoonacular.js"></script>
+</body>
+</html>

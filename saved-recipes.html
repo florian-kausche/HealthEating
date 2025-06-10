@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Recipes - HealthyEating</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container header-flex">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="image/Healthyeating-logo.png" alt="Healthy Eating Logo" class="logo-img"> 
+                    <span>HEALTHYEATING</span>
+                </a>
+            </div>            
+            <nav>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#testimonial" class="nav-link">Testimonials</a>
+                <a href="index.html#customize" class="nav-link">Customize</a>
+                <a href="index.html#kids" class="nav-link">Kids</a>
+                <a href="ai-recipes.html" class="nav-link">AI Recipes</a>
+                <a href="login.html" class="nav-link sign-in" id="sign-in-btn">Sign In</a>
+                <a href="signup.html" class="nav-link sign-up" id="sign-up-btn">Sign Up</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="saved-recipes-page">
+        <section class="hero-section">
+            <div class="container">
+                <h1>Your Saved Recipes</h1>
+                <p class="subtitle">Access your favorite recipes anytime, anywhere.</p>
+            </div>
+        </section>
+
+        <section class="saved-recipes-section">
+            <div class="container">
+                <div class="saved-recipes-controls">
+                    <div class="search-box">
+                        <input type="text" id="search-saved" placeholder="Search your saved recipes...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="view-options">
+                        <button class="view-btn active" data-view="grid">
+                            <i class="fas fa-th-large"></i> Grid
+                        </button>
+                        <button class="view-btn" data-view="list">
+                            <i class="fas fa-list"></i> List
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="saved-recipes-grid" id="saved-recipes-container">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+
+                <div id="no-saved-recipes" class="no-saved-recipes" style="display: none;">
+                    <i class="fas fa-bookmark"></i>
+                    <h3>No Saved Recipes Yet</h3>
+                    <p>Start exploring our AI-powered recipe suggestions to find and save your favorite recipes!</p>
+                    <a href="ai-recipes.html" class="cta-button">Discover Recipes</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container copyright">
+            &copy; 2025 HealthyEating
+        </div>
+    </footer>
+
+    <script src="ai-suggestions.js"></script>
+    <script src="saved-recipes.js"></script>
+</body>
+</html>

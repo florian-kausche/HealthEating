@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - HealthyEating</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container header-flex">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="image/Healthyeating-logo.png" alt="Healthy Eating Logo" class="logo-img"> 
+                    <span>HEALTHYEATING</span>
+                </a>
+            </div>
+            <button class="hamburger" aria-label="Open menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#testimonial" class="nav-link">Testimonials</a>
+                <a href="index.html#customize" class="nav-link">Customize</a>
+                <a href="index.html#kids" class="nav-link">Kids</a>
+                <a href="login.html" class="nav-link sign-in" id="sign-in-btn">Sign In</a>
+                <a href="signup.html" class="nav-link sign-up" id="sign-up-btn">Sign Up</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="cart-page">
+        <div class="cart-container">
+            <div class="cart-header">
+                <h1>Shopping Cart</h1>
+            </div>
+            
+            <div id="cart-items" class="cart-items">
+                <!-- Cart items will be dynamically inserted here -->
+            </div>
+
+            <div id="cart-summary" class="cart-summary">
+                <!-- Cart summary will be dynamically inserted here -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container copyright">
+            &copy; 2025 HealthyEating
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+</body>
+</html> 

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - HealthyEating</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+    <!-- Video Background -->
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="image/FoodDrinkForest.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay"></div>
+    <header class="main-header">
+        <div class="container header-flex">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="image/Healthyeating-logo.png" alt="Healthy Eating Logo" class="logo-img"> 
+                    <span>HEALTHYEATING</span>
+                </a>
+            </div>
+            <button class="hamburger" aria-label="Open menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#testimonial" class="nav-link">Testimonials</a>
+                <a href="index.html#customize" class="nav-link">Customize</a>
+                <a href="index.html#kids" class="nav-link">Kids</a>
+                <a href="login.html" class="nav-link sign-in" id="sign-in-btn">Sign In</a>
+                <a href="signup.html" class="nav-link sign-up" id="sign-up-btn">Sign Up</a>
+            </nav>
+        </div>
+    </header>
+    <div class="signup-page">
+        <div class="signup-container">
+            <div class="signup-box">
+                <a href="index.html" class="logo-link">
+                    <img src="image/Healthyeating-logo.png" alt="HealthyEating Logo" class="signup-logo">
+                    <h1>HealthyEating</h1>
+                </a>
+                
+                <h2>Create your account</h2>
+                <p class="signup-subtitle">Join our community of healthy food enthusiasts</p>
+
+                <form id="signup-form" class="signup-form" novalidate>
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" name="fullname" required 
+                               autocomplete="name" minlength="2" placeholder="Enter your full name">
+                        <span class="error-message" id="fullname-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required 
+                               autocomplete="email" placeholder="Enter your email address">
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="password-input">
+                            <input type="password" id="password" name="password" 
+                                   required minlength="8" placeholder="Create a password">
+                            <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="error-message" id="password-error"></span>
+                        <div class="password-requirements">
+                            <p>Password must contain:</p>
+                            <ul>
+                                <li id="length-check">At least 8 characters</li>
+                                <li id="uppercase-check">One uppercase letter</li>
+                                <li id="number-check">One number</li>
+                                <li id="special-check">One special character</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <div class="password-input">
+                            <input type="password" id="confirm-password" 
+                                   name="confirm-password" required placeholder="Confirm your password">
+                            <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="error-message" id="confirm-password-error"></span>
+                    </div>
+
+                    <div class="form-group checkbox">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">
+                            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                        </label>
+                        <span class="error-message" id="terms-error"></span>
+                    </div>
+
+                    <button type="submit" class="signup-button">Create Account</button>
+                </form>
+
+                <div class="social-signup">
+                    <div class="divider">or sign up with</div>
+                    <div class="social-buttons">
+                        <button class="social-btn google">
+                            <img src="image/Google_Icons.webp" alt="Google Icon" class="google-icon">
+                          
+                        </button>
+                        <button class="social-btn facebook">
+                            <img src="social-media/10464407.png" alt="Facebook">
+                            
+                        </button>
+                    </div>
+                </div>
+
+                <p class="signin-link">
+                    Already have an account? <a href="login.html">Sign in</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="signup.js"></script>
+</body>
+</html>

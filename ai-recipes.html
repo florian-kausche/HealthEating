@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Recipe Suggestions - HealthyEating</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ai-recipes.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container header-flex">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="image/Healthyeating-logo.png" alt="Healthy Eating Logo" class="logo-img"> 
+                    <span>HEALTHYEATING</span>
+                </a>
+            </div>
+            <button class="hamburger" aria-label="Open menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#testimonial" class="nav-link">Testimonials</a>
+                <a href="index.html#customize" class="nav-link">Customize</a>
+                <a href="index.html#kids" class="nav-link">Kids</a>
+                <a href="login.html" class="nav-link sign-in" id="sign-in-btn">Sign In</a>
+                <a href="signup.html" class="nav-link sign-up" id="sign-up-btn">Sign Up</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="ai-suggestions-page">
+        <section class="hero-section">
+            <div class="container">
+                <h1>AI-Powered Recipe Suggestions</h1>
+                <p class="subtitle">Let our AI help you discover new recipes based on your tastes, dietary needs, or available ingredients.</p>
+            </div>
+        </section>
+
+        <section class="preferences-section">
+            <div class="container">
+                <div class="preferences-card">
+                    <div class="card-header">
+                        <i class="fas fa-robot"></i>
+                        <h2>Tell Us Your Preferences</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="ai-preferences-form">
+                            <div class="form-group">
+                                <label for="query">What are you looking for?</label>
+                                <input type="text" id="query" name="query" 
+                                    placeholder="e.g., 'low-carb dinner', 'quick vegan lunch', 'use up leftover chicken'"
+                                    required>
+                            </div>
+                            <div class="preferences-grid">
+                                <div class="form-group">
+                                    <label for="diet">Dietary Restrictions</label>
+                                    <select id="diet" name="diet">
+                                        <option value="">No restrictions</option>
+                                        <option value="vegetarian">Vegetarian</option>
+                                        <option value="vegan">Vegan</option>
+                                        <option value="gluten-free">Gluten-Free</option>
+                                        <option value="ketogenic">Ketogenic</option>
+                                        <option value="paleo">Paleo</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cuisine">Cuisine Type</label>
+                                    <select id="cuisine" name="cuisine">
+                                        <option value="">Any cuisine</option>
+                                        <option value="african">African</option>
+                                        <option value="mediterranean">Mediterranean</option>
+                                        <option value="asian">Asian</option>
+                                        <option value="european">European</option>
+                                        <option value="mexican">Mexican</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="maxReadyTime">Max Preparation Time</label>
+                                    <select id="maxReadyTime" name="maxReadyTime">
+                                        <option value="">Any time</option>
+                                        <option value="15">15 minutes</option>
+                                        <option value="30">30 minutes</option>
+                                        <option value="45">45 minutes</option>
+                                        <option value="60">1 hour</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="intolerances">Intolerances</label>
+                                    <select id="intolerances" name="intolerances" multiple>
+                                        <option value="dairy">Dairy</option>
+                                        <option value="egg">Egg</option>
+                                        <option value="gluten">Gluten</option>
+                                        <option value="peanut">Peanut</option>
+                                        <option value="seafood">Seafood</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="submit-btn">Get Suggestions</button>
+                        </form>
+                        <div class="how-it-works">
+                            <h3><i class="fas fa-info-circle"></i> How it Works</h3>
+                            <p>Our AI analyzes your input to suggest relevant recipes. The more specific you are, the better the suggestions! (Powered by Spoonacular API)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="results-section" style="display: none;">
+            <div class="container">
+                <div class="results-grid" id="recipe-results"></div>
+                <div class="loading-spinner" id="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Finding perfect recipes for you...</p>
+                </div>
+                <button id="load-more" class="load-more-btn" style="display: none;">Load More Recipes</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container copyright">
+            &copy; 2025 HealthyEating
+        </div>
+    </footer>
+
+    <script src="ai-suggestions.js"></script>
+    <script src="ai-recipes.js"></script>
+</body>
+</html>

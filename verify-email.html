@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Email - HealthyEating</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .verify-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #6b46c1, #805ad5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .verify-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .verify-header img {
+            width: 120px;
+            margin-bottom: 1rem;
+        }
+
+        .verify-header h1 {
+            color: #2d3748;
+            font-size: 1.75rem;
+            margin: 0 0 1rem;
+        }
+
+        .verification-status {
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 10px;
+            background: #f7fafc;
+        }
+
+        .verification-status i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .verification-status.success i {
+            color: #48bb78;
+        }
+
+        .verification-status.error i {
+            color: #e53e3e;
+        }
+
+        .verification-status.pending i {
+            color: #ed8936;
+        }
+
+        .action-button {
+            background: #6b46c1;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .action-button:hover {
+            background: #553c9a;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container header-flex">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="image/Healthyeating-logo.png" alt="Healthy Eating Logo" class="logo-img"> 
+                    <span>HEALTHYEATING</span>
+                </a>
+            </div>            
+            <nav>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#testimonial" class="nav-link">Testimonials</a>
+                <a href="index.html#customize" class="nav-link">Customize</a>
+                <a href="index.html#kids" class="nav-link">Kids</a>
+                <a href="ai-recipes.html" class="nav-link">AI Recipes</a>
+                <a href="login.html" class="nav-link sign-in" id="sign-in-btn">Sign In</a>
+                <a href="signup.html" class="nav-link sign-up" id="sign-up-btn">Sign Up</a>
+            </nav>
+        </div>
+    </header>
+    <div class="verify-page">
+        <div class="verify-container">
+            <div class="verify-header">
+                <img src="image/Healthyeating-logo.png" alt="HealthyEating Logo">
+                <h1>Email Verification</h1>
+            </div>
+            
+            <div id="verification-status" class="verification-status pending">
+                <i class="fas fa-spinner fa-spin"></i>
+                <h2>Verifying your email...</h2>
+                <p>Please wait while we verify your email address.</p>
+            </div>
+            
+            <a href="login.html" class="action-button" style="display: none;">
+                Return to Login
+            </a>
+        </div>
+    </div>
+
+    <script type="module" src="verify-email.js"></script>
+</body>
+</html>
