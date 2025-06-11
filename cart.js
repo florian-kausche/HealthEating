@@ -1,41 +1,135 @@
 // Cart functionality
 class Cart {
     constructor() {
-        this.items = JSON.parse(localStorage.getItem('cart')) || [];
-        this.renderCart();
+        this.items = [];
+        this.isLoading = false;
+        this.error = null;
+        this.init();
     }
 
-    addItem(product) {
-        const existingItem = this.items.find(item => item.title === product.title);
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            this.items.push({
-                ...product,
-                quantity: 1
-            });
-        }
-        this.saveCart();
-        this.renderCart();
-    }
-
-    removeItem(title) {
-        this.items = this.items.filter(item => item.title !== title);
-        this.saveCart();
-        this.renderCart();
-    }
-
-    updateQuantity(title, quantity) {
-        const item = this.items.find(item => item.title === title);
-        if (item) {
-            item.quantity = Math.max(1, quantity);
-            this.saveCart();
+    async init() {
+        try {
+            this.showLoading();
+            await this.loadCart();
             this.renderCart();
+        } catch (error) {
+            this.handleError('Failed to initialize cart');
+        } finally {
+            this.hideLoading();
         }
     }
 
-    saveCart() {
-        localStorage.setItem('cart', JSON.stringify(this.items));
+    async loadCart() {
+        try {
+            const savedCart = localStorage.getItem('cart');
+            this.items = savedCart ? JSON.parse(savedCart) : [];
+        } catch (error) {
+            console.error('Error loading cart:', error);
+            this.items = [];
+        }
+    }
+
+    showLoading() {
+        this.isLoading = true;
+        const overlay = document.getElementById('loading-overlay');
+        if (overlay) overlay.style.display = 'flex';
+    }
+
+    hideLoading() {
+        this.isLoading = false;
+        const overlay = document.getElementById('loading-overlay');
+        if (overlay) overlay.style.display = 'none';
+    }
+
+    showError(message) {
+        this.error = message;
+        const errorElement = document.getElementById('cart-error');
+        if (errorElement) {
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            setTimeout(() => {
+                errorElement.style.display = 'none';
+                this.error = null;
+            }, 3000);
+        }
+    }
+
+    handleError(message) {
+        console.error(message);
+        this.showError(message);
+    }
+
+    async addItem(product) {
+        try {
+            this.showLoading();
+            const existingItem = this.items.find(item => item.title === product.title);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                this.items.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+
+            await this.saveCart();
+            this.renderCart();
+        } catch (error) {
+            this.handleError('Failed to add item to cart');
+        } finally {
+            this.hideLoading();
+        }
+    }
+
+    async removeItem(title) {
+        try {
+            this.showLoading();
+            this.items = this.items.filter(item => item.title !== title);
+            await this.saveCart();
+            this.renderCart();
+        } catch (error) {
+            this.handleError('Failed to remove item from cart');
+        } finally {
+            this.hideLoading();
+        }
+    }
+
+    async updateQuantity(title, quantity) {
+        try {
+            this.showLoading();
+            const item = this.items.find(item => item.title === title);
+            if (item) {
+                item.quantity = Math.max(1, quantity);
+                await this.saveCart();
+                this.renderCart();
+            }
+        } catch (error) {
+            this.handleError('Failed to update item quantity');
+        } finally {
+            this.hideLoading();
+        }
+    }
+
+    async clearCart() {
+        try {
+            this.showLoading();
+            this.items = [];
+            await this.saveCart();
+            this.renderCart();
+        } catch (error) {
+            this.handleError('Failed to clear cart');
+        } finally {
+            this.hideLoading();
+        }
+    }
+
+    async saveCart() {
+        try {
+            localStorage.setItem('cart', JSON.stringify(this.items));
+        } catch (error) {
+            throw new Error('Failed to save cart to storage');
+        }
     }
 
     getTotal() {
@@ -48,8 +142,20 @@ class Cart {
     renderCart() {
         const cartItems = document.getElementById('cart-items');
         const cartSummary = document.getElementById('cart-summary');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const clearCartBtn = document.getElementById('clear-cart-btn');
 
         if (!cartItems || !cartSummary) return;
+
+        // Update checkout button state
+        if (checkoutBtn) {
+            checkoutBtn.style.display = this.items.length > 0 ? 'flex' : 'none';
+        }
+
+        // Update clear cart button state
+        if (clearCartBtn) {
+            clearCartBtn.style.display = this.items.length > 0 ? 'flex' : 'none';
+        }
 
         if (this.items.length === 0) {
             cartItems.innerHTML = `
@@ -65,20 +171,24 @@ class Cart {
         }
 
         cartItems.innerHTML = this.items.map(item => `
-            <div class="cart-item">
-                <img src="${item.img}" alt="${item.title}">
+            <div class="cart-item" data-title="${item.title}">
+                <img src="${item.img}" alt="${item.title}" onerror="this.src='image/placeholder.jpg'">
                 <div class="item-details">
                     <h3>${item.title}</h3>
                     <p>${item.desc}</p>
                     <div class="item-quantity">
-                        <button onclick="cart.updateQuantity('${item.title}', ${item.quantity - 1})">-</button>
-                        <span>${item.quantity}</span>
-                        <button onclick="cart.updateQuantity('${item.title}', ${item.quantity + 1})">+</button>
+                        <button class="quantity-btn" onclick="window.cart.updateQuantity('${item.title}', ${item.quantity - 1})">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <span class="quantity">${item.quantity}</span>
+                        <button class="quantity-btn" onclick="window.cart.updateQuantity('${item.title}', ${item.quantity + 1})">
+                            <i class="fas fa-plus"></i>
+                        </button>
                     </div>
                 </div>
                 <div class="item-actions">
                     <div class="item-price">${item.price}</div>
-                    <button class="remove-item" onclick="cart.removeItem('${item.title}')">
+                    <button class="remove-item" onclick="window.cart.removeItem('${item.title}')">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>
@@ -90,37 +200,53 @@ class Cart {
         const total = subtotal + shipping;
 
         cartSummary.innerHTML = `
-            <div class="summary-row">
-                <span>Subtotal</span>
-                <span>$${subtotal.toFixed(2)}</span>
+            <h3>Order Summary</h3>
+            <div class="summary-content">
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span>$${subtotal.toFixed(2)}</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping:</span>
+                    <span>$${shipping.toFixed(2)}</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total:</span>
+                    <span>$${total.toFixed(2)}</span>
+                </div>
             </div>
-            <div class="summary-row">
-                <span>Shipping</span>
-                <span>$${shipping.toFixed(2)}</span>
+            <div class="summary-actions">
+                <a href="checkout.html" class="checkout-btn" id="checkout-btn">
+                    <i class="fas fa-lock"></i>
+                    Proceed to Checkout
+                </a>
+                <button class="clear-cart-btn" id="clear-cart-btn" onclick="window.cart.clearCart()">
+                    <i class="fas fa-trash"></i>
+                    Clear Cart
+                </button>
             </div>
-            <div class="summary-row total">
-                <span>Total</span>
-                <span>$${total.toFixed(2)}</span>
-            </div>
-            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
         `;
     }
 }
 
-// Initialize cart
-const cart = new Cart();
-
-// Checkout function
-function checkout() {
-    // For now, just show an alert
-    alert('Checkout functionality coming soon!');
-}
-
-// Add to cart function (used by product cards)
-function addToCart(productTitle) {
-    const product = products.find(p => p.title === productTitle);
-    if (product) {
-        cart.addItem(product);
-        window.location.href = 'cart.html';
+// Initialize cart when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Make Cart class available globally
+    window.Cart = Cart;
+    
+    // Initialize cart only if not already initialized
+    if (!window.cart) {
+        window.cart = new Cart();
     }
-} 
+
+    // Add to cart function (used by product cards)
+    window.addToCart = async function(productTitle) {
+        const product = window.products.find(p => p.title === productTitle);
+        if (product) {
+            await window.cart.addItem(product);
+            setTimeout(() => {
+                window.location.href = 'cart.html';
+            }, 100);
+        }
+    };
+}); 

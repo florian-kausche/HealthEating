@@ -1,13 +1,3 @@
-import { TokenService, ApiService } from './api-config.js';
-
-function showPopup() {
-    document.getElementById('popup').classList.add('active');
-}
-
-function closePopup() {
-    document.getElementById('popup').classList.remove('active');
-}
-
 // Initialize popup functionality
 document.addEventListener('DOMContentLoaded', () => {
     // Show popup after 3 seconds
@@ -195,6 +185,7 @@ function renderProducts() {
 
 // Make products array available globally
 window.products = products;
+window.addToCart = addToCart; // Make addToCart function globally available
 
 // Call renderProducts on DOMContentLoaded
 window.addEventListener('DOMContentLoaded', renderProducts);
@@ -351,5 +342,48 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+});
+
+// Add to Cart functionality
+function addToCart(productTitle) {
+    const product = products.find(p => p.title === productTitle);
+    if (!product) return;
+
+    // Get existing cart or initialize new one
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Check if product already in cart
+    const existingItem = cart.find(item => item.title === productTitle);
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            title: product.title,
+            price: product.price,
+            img: product.img,
+            quantity: 1
+        });
+    }
+    
+    // Save updated cart
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Show success message
+    alert('Product added to cart!');
+}
+
+// Initialize products section
+document.addEventListener('DOMContentLoaded', () => {
+    renderProducts();
+    
+    // Add event listeners for product buttons
+    const productButtons = document.querySelectorAll('.product-btn');
+    productButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const productTitle = e.target.getAttribute('onclick').match(/'([^']+)'/)[1];
+            addToCart(productTitle);
+        });
+    });
 });
 

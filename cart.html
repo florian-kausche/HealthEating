@@ -38,30 +38,53 @@
         <div class="cart-container">
             <div class="cart-header">
                 <h1>Shopping Cart</h1>
+                <div class="cart-navigation">
+                    <a href="index.html" class="continue-shopping">
+                        <i class="fas fa-arrow-left"></i>
+                        Continue Shopping
+                    </a>
+                </div>
             </div>
             
-            <div id="cart-items" class="cart-items">
-                <!-- Cart items will be dynamically inserted here -->
-            </div>
+            <div class="cart-content">
+                <div class="cart-items-container">
+                    <div id="cart-items" class="cart-items">
+                        <!-- Cart items will be dynamically inserted here -->
+                    </div>
+                    <div id="cart-error" class="cart-error" style="display: none;">
+                        <!-- Error messages will be shown here -->
+                    </div>
+                </div>
 
-            <div class="cart-summary">
-                <h3>Cart Summary</h3>
-                <div class="summary-row">
-                    <span>Subtotal:</span>
-                    <span id="subtotal">$0.00</span>
+                <div class="cart-summary-container">
+                    <div id="cart-summary" class="cart-summary">
+                        <h3>Order Summary</h3>
+                        <div class="summary-content">
+                            <div class="summary-row">
+                                <span>Subtotal:</span>
+                                <span id="subtotal">$0.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Shipping:</span>
+                                <span id="shipping">$0.00</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total:</span>
+                                <span id="total">$0.00</span>
+                            </div>
+                        </div>
+                        <div class="summary-actions">
+                            <a href="checkout.html" class="checkout-btn" id="checkout-btn">
+                                <i class="fas fa-lock"></i>
+                                Proceed to Checkout
+                            </a>
+                            <button class="clear-cart-btn" id="clear-cart-btn">
+                                <i class="fas fa-trash"></i>
+                                Clear Cart
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="summary-row">
-                    <span>Shipping:</span>
-                    <span id="shipping">$0.00</span>
-                </div>
-                <div class="summary-row total">
-                    <span>Total:</span>
-                    <span id="total">$0.00</span>
-                </div>
-                <a href="checkout.html" class="checkout-btn">
-                    <i class="fas fa-lock"></i>
-                    Proceed to Checkout
-                </a>
             </div>
         </div>
     </main>
@@ -72,6 +95,13 @@
         </div>
     </footer>
 
+    <!-- Loading overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
     <script src="cart.js"></script>
 </body>
 </html> 
