@@ -338,16 +338,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Add to cart function (used by product cards)
-function addToCart(productTitle) {
-    const product = products.find(p => p.title === productTitle);
-    if (product) {
-        cart.addItem(product);
-        window.location.href = 'cart.html';
-    }
-}
-window.addToCart = addToCart;
-
 document.addEventListener('DOMContentLoaded', () => {
   const hamburger = document.querySelector('.hamburger');
   const nav = document.querySelector('nav');

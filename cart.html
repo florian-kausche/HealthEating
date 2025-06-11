@@ -44,8 +44,24 @@
                 <!-- Cart items will be dynamically inserted here -->
             </div>
 
-            <div id="cart-summary" class="cart-summary">
-                <!-- Cart summary will be dynamically inserted here -->
+            <div class="cart-summary">
+                <h3>Cart Summary</h3>
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping:</span>
+                    <span id="shipping">$0.00</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total:</span>
+                    <span id="total">$0.00</span>
+                </div>
+                <a href="checkout.html" class="checkout-btn">
+                    <i class="fas fa-lock"></i>
+                    Proceed to Checkout
+                </a>
             </div>
         </div>
     </main>
