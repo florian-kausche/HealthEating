@@ -131,17 +131,46 @@ async function handleOrderSubmission(e) {
     submitBtn.textContent = 'Processing...';
 
     try {
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        // Get cart items
+        const cart = new Cart();
+        
+        // Save order details to localStorage
+        const orderDetails = {
+            fullName: document.getElementById('full-name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            address: document.getElementById('address').value,
+            paymentMethod: paymentType,
+            transactionId: 'TXN-' + Math.random().toString(36).substr(2, 9).toUpperCase(),
+            orderDate: new Date().toISOString()
+        };
+
+        // Add payment-specific details
+        if (paymentType === 'credit-card') {
+            orderDetails.cardLast4 = document.getElementById('card-number').value.slice(-4);
+        } else if (paymentType === 'mobile-money') {
+            orderDetails.mobileProvider = document.getElementById('mobile-provider').value;
+        }
+
+        // Format cart items for storage
+        const formattedCartItems = cart.items.map(item => ({
+            title: item.title,
+            price: item.price,
+            quantity: item.quantity,
+            img: item.img,
+            desc: item.desc
+        }));
+
+        // Save order details and cart items
+        localStorage.setItem('orderDetails', JSON.stringify(orderDetails));
+        localStorage.setItem('cartItems', JSON.stringify(formattedCartItems));
 
         // Clear cart
-        const cart = new Cart();
         cart.items = [];
         cart.saveCart();
 
-        // Show success message and redirect
-        alert('Order placed successfully! Thank you for your purchase.');
-        window.location.href = 'index.html';
+        // Redirect to confirmation page
+        window.location.href = 'confirmation.html';
     } catch (error) {
         console.error('Error placing order:', error);
         alert('There was an error processing your order. Please try again.');

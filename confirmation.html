@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - HealthyEating</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="confirmation.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container header-flex">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="image/Healthyeating-logo.png" alt="Healthy Eating Logo" class="logo-img"> 
+                    <span>HEALTHYEATING</span>
+                </a>
+            </div>
+            <button class="hamburger" aria-label="Open menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav>
+                <a href="index.html#about" class="nav-link">About</a>
+                <a href="index.html#features" class="nav-link">Features</a>
+                <a href="index.html#testimonial" class="nav-link">Testimonials</a>
+                <a href="index.html#customize" class="nav-link">Customize</a>
+                <a href="index.html#kids" class="nav-link">Kids</a>
+                <a href="login.html" class="nav-link sign-in" id="sign-in-btn">Sign In</a>
+                <a href="signup.html" class="nav-link sign-up" id="sign-up-btn">Sign Up</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="confirmation-page">
+        <div class="confirmation-container">
+            <div class="confirmation-header">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h1>Order Confirmed!</h1>
+                <p class="order-number">Order #<span id="order-number"></span></p>
+                <p class="order-date" id="order-date"></p>
+            </div>
+
+            <div class="confirmation-content">
+                <div class="confirmation-details">
+                    <div class="detail-section">
+                        <h2>Thank You for Your Order</h2>
+                        <p>Your order has been successfully placed and is being processed. You will receive a confirmation email shortly.</p>
+                        <div class="order-status">
+                            <div class="status-step active">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Order Placed</span>
+                            </div>
+                            <div class="status-step">
+                                <i class="fas fa-box"></i>
+                                <span>Processing</span>
+                            </div>
+                            <div class="status-step">
+                                <i class="fas fa-truck"></i>
+                                <span>Shipping</span>
+                            </div>
+                            <div class="status-step">
+                                <i class="fas fa-home"></i>
+                                <span>Delivery</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Order Summary</h3>
+                        <div id="order-items" class="order-items">
+                            <!-- Order items will be dynamically inserted here -->
+                        </div>
+                        <div class="order-totals">
+                            <div class="total-row">
+                                <span>Subtotal</span>
+                                <span id="subtotal">$0.00</span>
+                            </div>
+                            <div class="total-row">
+                                <span>Shipping</span>
+                                <span id="shipping">$0.00</span>
+                            </div>
+                            <div class="total-row">
+                                <span>Tax</span>
+                                <span id="tax">$0.00</span>
+                            </div>
+                            <div class="total-row grand-total">
+                                <span>Total</span>
+                                <span id="total">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Shipping Information</h3>
+                        <div id="shipping-info" class="shipping-info">
+                            <!-- Shipping information will be dynamically inserted here -->
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3>Payment Information</h3>
+                        <div id="payment-info" class="payment-info">
+                            <!-- Payment information will be dynamically inserted here -->
+                        </div>
+                    </div>
+
+                    <div class="next-steps">
+                        <h3>What's Next?</h3>
+                        <ul>
+                            <li><i class="fas fa-envelope"></i> You'll receive an order confirmation email</li>
+                            <li><i class="fas fa-truck"></i> We'll notify you when your order ships</li>
+                            <li><i class="fas fa-clock"></i> Estimated delivery: 3-5 business days</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Track your order status in your account</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="confirmation-actions">
+                    <a href="index.html" class="btn primary-btn">
+                        <i class="fas fa-home"></i> Return to Home
+                    </a>
+                    <button id="print-receipt" class="btn secondary-btn">
+                        <i class="fas fa-print"></i> Print Receipt
+                    </button>
+                    <button id="download-receipt" class="btn secondary-btn">
+                        <i class="fas fa-download"></i> Download PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container copyright">
+            &copy; 2025 HealthyEating
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="confirmation.js"></script>
+</body>
+</html> 

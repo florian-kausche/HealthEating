@@ -112,14 +112,25 @@
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
+    background: white;
 }
 
 .payment-method:hover {
     border-color: #ff7f50;
+    background: #fff9f7;
+}
+
+.payment-method.active {
+    border-color: #ff7f50;
+    background: #fff9f7;
+    box-shadow: 0 2px 8px rgba(255, 127, 80, 0.1);
 }
 
 .payment-method input[type="radio"] {
-    width: auto;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    cursor: pointer;
 }
 
 .payment-method label {
@@ -128,6 +139,7 @@
     gap: 0.5rem;
     margin: 0;
     cursor: pointer;
+    flex: 1;
 }
 
 .payment-method i {
@@ -135,11 +147,27 @@
     color: #666;
 }
 
+.payment-method.active i {
+    color: #ff7f50;
+}
+
 .payment-form {
     margin-top: 1.5rem;
     padding: 1.5rem;
     border: 1px solid #ddd;
     border-radius: 5px;
+    background: white;
+    display: none;
+}
+
+.payment-form.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .cash-info {
