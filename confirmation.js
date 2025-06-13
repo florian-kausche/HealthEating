@@ -123,18 +123,37 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('download-receipt').addEventListener('click', async function() {
         try {
             const element = document.querySelector('.confirmation-container');
+            
+            // Configure html2canvas with better settings
             const canvas = await html2canvas(element, {
-                scale: 2,
+                scale: 3, // Increased scale for better quality
                 useCORS: true,
-                logging: false
+                logging: false,
+                allowTaint: true,
+                backgroundColor: '#ffffff',
+                windowWidth: element.scrollWidth,
+                windowHeight: element.scrollHeight
             });
 
             const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pdf = new jsPDF({
+                orientation: 'portrait',
+                unit: 'mm',
+                format: 'a4'
+            });
+
             const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-            
-            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            const pdfHeight = pdf.internal.pageSize.getHeight();
+            const imgWidth = canvas.width;
+            const imgHeight = canvas.height;
+            const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+            const imgX = (pdfWidth - imgWidth * ratio) / 2;
+            const imgY = 0;
+
+            // Add the image to the PDF
+            pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+
+            // Save the PDF
             pdf.save(`order-${orderNumber}.pdf`);
         } catch (error) {
             console.error('Error generating PDF:', error);
