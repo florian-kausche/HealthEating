@@ -97,7 +97,7 @@ class AuthManager {
             // OAuth configuration (replace with your actual OAuth credentials)
             const config = {
                 google: {
-                    client_id: 'your-google-client-id',
+                    client_id: '917763527125-imu0l8f8tfl4453c0oiq7779mvpe2re9.apps.googleusercontent.com',
                     redirect_uri: `${window.location.origin}/oauth/callback`,
                     scope: 'email profile'
                 },
