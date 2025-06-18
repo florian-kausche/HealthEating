@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const recipesPerPage = 10;
     let totalResults = 0;
     let draggedItem = null;
+    let currentQuery = '';
+    let isLoading = false;
 
     // Make recipe cards draggable
     function makeDraggable(element) {
@@ -54,73 +56,70 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    preferencesForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
+    /**
+     * Handles the form submission for recipe suggestions
+     * @param {Event} event - The form submission event
+     */
+    async function handleFormSubmit(event) {
+        event.preventDefault();
+        
+        // Reset state
         currentOffset = 0;
-        await searchRecipes();
-    });
-
-    loadMoreBtn.addEventListener('click', async () => {
-        currentOffset += recipesPerPage;
-        await searchRecipes(true);
-    });
-
-    async function searchRecipes(append = false) {
+        recipeResults.innerHTML = '';
+        
+        // Get form data
+        const formData = new FormData(preferencesForm);
+        currentQuery = formData.get('query');
+        
+        // Show loading state
+        showLoading(true);
+        resultsSection.style.display = 'block';
+        
         try {
-            if (!append) {
-                recipeResults.innerHTML = '';
-                loadingSpinner.style.display = 'flex';
-                resultsSection.style.display = 'block';
-            }
-
-            const formData = new FormData(preferencesForm);
-            const searchParams = {
-                query: formData.get('query'),
+            // Fetch recipes from Spoonacular API
+            const recipes = await searchRecipes({
+                query: currentQuery,
                 diet: formData.get('diet'),
                 cuisine: formData.get('cuisine'),
                 maxReadyTime: formData.get('maxReadyTime'),
-                intolerances: Array.from(formData.getAll('intolerances')).join(','),
-                offset: currentOffset,
-                number: recipesPerPage
-            };
-
-            const data = await searchRecipes(searchParams);
-            totalResults = data.totalResults;
-            displayRecipes(data.results, append);
+                intolerances: formData.getAll('intolerances'),
+                offset: currentOffset
+            });
             
-            // Show/hide load more button based on remaining results
-            const remainingResults = totalResults - (currentOffset + data.results.length);
-            loadMoreBtn.style.display = remainingResults > 0 ? 'block' : 'none';
+            // Display results
+            displayRecipes(recipes);
+            
+            // Show/hide load more button based on results
+            loadMoreBtn.style.display = recipes.length === 10 ? 'block' : 'none';
         } catch (error) {
-            console.error('Error searching recipes:', error);
-            recipeResults.innerHTML = '<p class="error-message">Sorry, there was an error fetching recipes. Please try again.</p>';
+            console.error('Error fetching recipes:', error);
+            showError('Failed to fetch recipes. Please try again.');
         } finally {
-            loadingSpinner.style.display = 'none';
+            showLoading(false);
         }
     }
 
-    function displayRecipes(recipes, append) {
-        if (!append) {
-            recipeResults.innerHTML = '';
-        }
-
-        recipes.forEach((recipe, index) => {
-            const recipeCard = createRecipeCard(recipe, index);
+    /**
+     * Displays recipe cards in the results grid
+     * @param {Array} recipes - Array of recipe objects from the API
+     */
+    function displayRecipes(recipes) {
+        recipes.forEach(recipe => {
+            const recipeCard = createRecipeCard(recipe);
             recipeResults.appendChild(recipeCard);
-            makeDraggable(recipeCard);
         });
-
-        // Add drag and drop event listeners to the results container
-        recipeResults.addEventListener('dragover', handleDragOver);
-        recipeResults.addEventListener('drop', handleDrop);
     }
 
-    function createRecipeCard(recipe, index) {
+    /**
+     * Creates a recipe card element
+     * @param {Object} recipe - Recipe data from the API
+     * @returns {HTMLElement} The recipe card element
+     */
+    function createRecipeCard(recipe) {
         const card = document.createElement('div');
         card.className = 'recipe-card';
-        card.id = `recipe-${recipe.id}`;
+        
         card.innerHTML = `
-            <div class="drag-handle"><i class="fas fa-grip-vertical"></i></div>
             <img src="${recipe.image}" alt="${recipe.title}" class="recipe-image">
             <div class="recipe-info">
                 <h3>${recipe.title}</h3>
@@ -128,42 +127,74 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span><i class="fas fa-clock"></i> ${recipe.readyInMinutes} mins</span>
                     <span><i class="fas fa-utensils"></i> ${recipe.servings} servings</span>
                 </div>
+                <p class="recipe-summary">${recipe.summary}</p>
                 <div class="recipe-tags">
-                    ${recipe.diets ? recipe.diets.map(diet => `<span class="tag">${diet}</span>`).join('') : ''}
+                    ${recipe.diets.map(diet => `<span class="tag">${diet}</span>`).join('')}
                 </div>
-                <div class="recipe-actions">
-                    <button class="view-recipe-btn" data-id="${recipe.id}">View Recipe</button>
-                    <button class="add-to-plan-btn" data-id="${recipe.id}">
-                        <i class="fas fa-calendar-plus"></i> Add to Plan
-                    </button>
-                </div>
+                <a href="${recipe.sourceUrl}" target="_blank" class="view-recipe-btn">View Recipe</a>
             </div>
         `;
-
-        // View recipe button
-        card.querySelector('.view-recipe-btn').addEventListener('click', async () => {
-            try {
-                const recipeDetails = await getRecipeDetails(recipe.id);
-                sessionStorage.setItem('currentRecipe', JSON.stringify(recipeDetails));
-                window.location.href = `/recipe.html?id=${recipe.id}`;
-            } catch (error) {
-                console.error('Error fetching recipe details:', error);
-                alert('Sorry, there was an error loading the recipe details. Please try again.');
-            }
-        });
-
-        // Add to plan button
-        card.querySelector('.add-to-plan-btn').addEventListener('click', async () => {
-            try {
-                const today = new Date().toISOString().split('T')[0];
-                await addToMealPlan(recipe.id, today, 'lunch');
-                alert('Recipe added to your meal plan!');
-            } catch (error) {
-                console.error('Error adding recipe to meal plan:', error);
-                alert('Sorry, there was an error adding the recipe to your meal plan. Please try again.');
-            }
-        });
-
+        
         return card;
     }
+
+    /**
+     * Handles loading more recipes when the "Load More" button is clicked
+     */
+    async function handleLoadMore() {
+        if (isLoading) return;
+        
+        isLoading = true;
+        currentOffset += 10;
+        showLoading(true);
+        
+        try {
+            const recipes = await searchRecipes({
+                query: currentQuery,
+                offset: currentOffset
+            });
+            
+            displayRecipes(recipes);
+            loadMoreBtn.style.display = recipes.length === 10 ? 'block' : 'none';
+        } catch (error) {
+            console.error('Error loading more recipes:', error);
+            showError('Failed to load more recipes. Please try again.');
+        } finally {
+            isLoading = false;
+            showLoading(false);
+        }
+    }
+
+    /**
+     * Shows or hides the loading spinner
+     * @param {boolean} show - Whether to show or hide the spinner
+     */
+    function showLoading(show) {
+        loadingSpinner.style.display = show ? 'flex' : 'none';
+    }
+
+    /**
+     * Shows an error message to the user
+     * @param {string} message - The error message to display
+     */
+    function showError(message) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.textContent = message;
+        
+        resultsSection.insertBefore(errorDiv, recipeResults);
+        
+        setTimeout(() => {
+            errorDiv.remove();
+        }, 5000);
+    }
+
+    // Event Listeners
+    preferencesForm.addEventListener('submit', handleFormSubmit);
+    loadMoreBtn.addEventListener('click', handleLoadMore);
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', () => {
+        // Add any initialization code here
+    });
 }); 

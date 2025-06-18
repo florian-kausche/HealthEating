@@ -1,27 +1,42 @@
 <!DOCTYPE html>
+<!-- 
+    AI Recipe Suggestions Page
+    This page provides an interface for users to get AI-powered recipe suggestions
+    based on their preferences, dietary restrictions, and available ingredients.
+    It uses the Spoonacular API to fetch and display recipe data.
+-->
+
 <html lang="en">
 <head>
+    <!-- Meta tags for proper rendering and character encoding -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Recipe Suggestions - HealthyEating</title>
+    
+    <!-- External CSS libraries -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS files -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="ai-recipes.css">
 </head>
 <body>
+    <!-- Header section with navigation -->
     <header class="main-header">
         <div class="container header-flex">
+            <!-- Logo and brand name -->
             <div class="logo">
                 <a href="index.html">
                     <img src="image/Healthyeating-logo.png" alt="Healthy Eating Logo" class="logo-img"> 
                     <span>HEALTHYEATING</span>
                 </a>
             </div>
+            <!-- Mobile menu button -->
             <button class="hamburger" aria-label="Open menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
+            <!-- Main navigation menu -->
             <nav>
                 <a href="index.html#about" class="nav-link">About</a>
                 <a href="index.html#features" class="nav-link">Features</a>
@@ -34,7 +49,9 @@
         </div>
     </header>
 
+    <!-- Main content area -->
     <main class="ai-suggestions-page">
+        <!-- Hero section with page title and description -->
         <section class="hero-section">
             <div class="container">
                 <h1>AI-Powered Recipe Suggestions</h1>
@@ -42,22 +59,29 @@
             </div>
         </section>
 
+        <!-- Preferences section for user input -->
         <section class="preferences-section">
             <div class="container">
                 <div class="preferences-card">
+                    <!-- Card header with icon and title -->
                     <div class="card-header">
                         <i class="fas fa-robot"></i>
                         <h2>Tell Us Your Preferences</h2>
                     </div>
+                    <!-- Card body with form inputs -->
                     <div class="card-body">
+                        <!-- Form for user preferences -->
                         <form id="ai-preferences-form">
+                            <!-- Search query input -->
                             <div class="form-group">
                                 <label for="query">What are you looking for?</label>
                                 <input type="text" id="query" name="query" 
                                     placeholder="e.g., 'low-carb dinner', 'quick vegan lunch', 'use up leftover chicken'"
                                     required>
                             </div>
+                            <!-- Grid of preference filters -->
                             <div class="preferences-grid">
+                                <!-- Dietary restrictions dropdown -->
                                 <div class="form-group">
                                     <label for="diet">Dietary Restrictions</label>
                                     <select id="diet" name="diet">
@@ -69,6 +93,7 @@
                                         <option value="paleo">Paleo</option>
                                     </select>
                                 </div>
+                                <!-- Cuisine type dropdown -->
                                 <div class="form-group">
                                     <label for="cuisine">Cuisine Type</label>
                                     <select id="cuisine" name="cuisine">
@@ -80,6 +105,7 @@
                                         <option value="mexican">Mexican</option>
                                     </select>
                                 </div>
+                                <!-- Preparation time dropdown -->
                                 <div class="form-group">
                                     <label for="maxReadyTime">Max Preparation Time</label>
                                     <select id="maxReadyTime" name="maxReadyTime">
@@ -90,6 +116,7 @@
                                         <option value="60">1 hour</option>
                                     </select>
                                 </div>
+                                <!-- Food intolerances multi-select -->
                                 <div class="form-group">
                                     <label for="intolerances">Intolerances</label>
                                     <select id="intolerances" name="intolerances" multiple>
@@ -101,8 +128,10 @@
                                     </select>
                                 </div>
                             </div>
+                            <!-- Submit button -->
                             <button type="submit" class="submit-btn">Get Suggestions</button>
                         </form>
+                        <!-- Information about how the AI works -->
                         <div class="how-it-works">
                             <h3><i class="fas fa-info-circle"></i> How it Works</h3>
                             <p>Our AI analyzes your input to suggest relevant recipes. The more specific you are, the better the suggestions! (Powered by Spoonacular API)</p>
@@ -112,24 +141,30 @@
             </div>
         </section>
 
+        <!-- Results section for displaying recipe suggestions -->
         <section class="results-section" style="display: none;">
             <div class="container">
+                <!-- Grid container for recipe cards -->
                 <div class="results-grid" id="recipe-results"></div>
+                <!-- Loading spinner for API requests -->
                 <div class="loading-spinner" id="loading-spinner">
                     <div class="spinner"></div>
                     <p>Finding perfect recipes for you...</p>
                 </div>
+                <!-- Load more button for pagination -->
                 <button id="load-more" class="load-more-btn" style="display: none;">Load More Recipes</button>
             </div>
         </section>
     </main>
 
+    <!-- Footer section -->
     <footer>
         <div class="container copyright">
             &copy; 2025 HealthyEating
         </div>
     </footer>
 
+    <!-- JavaScript modules -->
     <script type="module" src="spoonacular.js"></script>
     <script type="module" src="ai-recipes.js"></script>
 </body>

@@ -1,10 +1,10 @@
-// Initialize checkout functionality
+// Initialize checkout functionality and event listeners
 document.addEventListener('DOMContentLoaded', () => {
-    // Load cart items and update summary
+    // Load cart items and update summary on page load
     loadCartItems();
     updateSummary();
 
-    // Handle payment method selection
+    // Handle payment method selection (show/hide payment forms)
     const paymentMethods = document.querySelectorAll('.payment-method');
     paymentMethods.forEach(method => {
         method.addEventListener('click', () => {
@@ -24,20 +24,21 @@ document.addEventListener('DOMContentLoaded', () => {
         expiry.addEventListener('input', formatExpiry);
     }
 
-    // Handle form submission
+    // Handle form submission for placing an order
     const placeOrderBtn = document.getElementById('place-order-btn');
     if (placeOrderBtn) {
         placeOrderBtn.addEventListener('click', handleOrderSubmission);
     }
 });
 
-// Load cart items into checkout page
+// Load cart items into the checkout page and display them
 function loadCartItems() {
     const checkoutItems = document.getElementById('checkout-items');
     if (!checkoutItems) return;
 
     const cart = new Cart();
     if (cart.items.length === 0) {
+        // Show empty cart message if no items
         checkoutItems.innerHTML = `
             <div class="empty-cart">
                 <i class="fas fa-shopping-cart"></i>
@@ -49,6 +50,7 @@ function loadCartItems() {
         return;
     }
 
+    // Render each cart item in the checkout summary
     checkoutItems.innerHTML = cart.items.map(item => `
         <div class="checkout-item">
             <img src="${item.img}" alt="${item.title}">
@@ -62,7 +64,7 @@ function loadCartItems() {
     `).join('');
 }
 
-// Update order summary totals
+// Update order summary totals (subtotal, shipping, total)
 function updateSummary() {
     const cart = new Cart();
     const subtotal = cart.getTotal();
@@ -74,7 +76,7 @@ function updateSummary() {
     document.getElementById('total').textContent = `$${total.toFixed(2)}`;
 }
 
-// Show selected payment form
+// Show the selected payment form and hide others
 function showPaymentForm(paymentType) {
     const forms = document.querySelectorAll('.payment-form');
     forms.forEach(form => form.style.display = 'none');
@@ -85,14 +87,14 @@ function showPaymentForm(paymentType) {
     }
 }
 
-// Format credit card number with spaces
+// Format credit card number input with spaces for readability
 function formatCardNumber(input) {
     let value = input.value.replace(/\D/g, '');
     value = value.replace(/(\d{4})/g, '$1 ').trim();
     input.value = value;
 }
 
-// Format expiry date
+// Format expiry date input as MM/YY
 function formatExpiry(input) {
     let value = input.value.replace(/\D/g, '');
     if (value.length >= 2) {
@@ -101,7 +103,7 @@ function formatExpiry(input) {
     input.value = value;
 }
 
-// Handle order submission
+// Handle order submission: validate, save, and redirect
 async function handleOrderSubmission(e) {
     e.preventDefault();
 
@@ -112,14 +114,14 @@ async function handleOrderSubmission(e) {
         return;
     }
 
-    // Validate shipping form
+    // Validate shipping form fields
     const shippingForm = document.getElementById('shipping-form');
     if (!shippingForm.checkValidity()) {
         shippingForm.reportValidity();
         return;
     }
 
-    // Validate payment details based on selected method
+    // Validate payment details for the selected method
     const paymentType = selectedPayment.value;
     if (!validatePaymentDetails(paymentType)) {
         return;
@@ -134,7 +136,7 @@ async function handleOrderSubmission(e) {
         // Get cart items
         const cart = new Cart();
         
-        // Save order details to localStorage
+        // Prepare order details for storage
         const orderDetails = {
             fullName: document.getElementById('full-name').value,
             email: document.getElementById('email').value,
@@ -161,11 +163,11 @@ async function handleOrderSubmission(e) {
             desc: item.desc
         }));
 
-        // Save order details and cart items
+        // Save order details and cart items to localStorage
         localStorage.setItem('orderDetails', JSON.stringify(orderDetails));
         localStorage.setItem('cartItems', JSON.stringify(formattedCartItems));
 
-        // Clear cart
+        // Clear cart after order is placed
         cart.items = [];
         cart.saveCart();
 
@@ -179,7 +181,7 @@ async function handleOrderSubmission(e) {
     }
 }
 
-// Validate payment details based on selected method
+// Validate payment details based on selected payment method
 function validatePaymentDetails(paymentType) {
     switch (paymentType) {
         case 'credit-card':
@@ -187,14 +189,17 @@ function validatePaymentDetails(paymentType) {
             const expiry = document.getElementById('expiry').value;
             const cvv = document.getElementById('cvv').value;
 
+            // Validate card number length
             if (cardNumber.length !== 16) {
                 alert('Please enter a valid 16-digit card number');
                 return false;
             }
+            // Validate expiry date format
             if (!expiry.match(/^\d{2}\/\d{2}$/)) {
                 alert('Please enter a valid expiry date (MM/YY)');
                 return false;
             }
+            // Validate CVV length
             if (cvv.length !== 3) {
                 alert('Please enter a valid 3-digit CVV');
                 return false;

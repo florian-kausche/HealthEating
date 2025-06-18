@@ -1,23 +1,24 @@
 // API Configuration and Endpoints
+// This object contains all API-related configuration including base URL, endpoints, and headers
 const API_CONFIG = {
     BASE_URL: 'https://api.healthyeating.com', // Replace with your actual API domain
     ENDPOINTS: {
-        LOGIN: '/auth/login',
-        SIGNUP: '/auth/signup',
-        VERIFY_EMAIL: '/auth/verify-email',
-        RESET_PASSWORD: '/auth/reset-password',
+        LOGIN: '/auth/login',           // Endpoint for user login
+        SIGNUP: '/auth/signup',         // Endpoint for user registration
+        VERIFY_EMAIL: '/auth/verify-email', // Endpoint for email verification
+        RESET_PASSWORD: '/auth/reset-password', // Endpoint for password reset
         OAUTH: {
-            GOOGLE: '/auth/oauth/google',
-            FACEBOOK: '/auth/oauth/facebook',
-            APPLE: '/auth/oauth/apple'
+            GOOGLE: '/auth/oauth/google',    // Google OAuth endpoint
+            FACEBOOK: '/auth/oauth/facebook', // Facebook OAuth endpoint
+            APPLE: '/auth/oauth/apple'        // Apple OAuth endpoint
         }
     },
     HEADERS: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json'  // Default content type for API requests
     },
     CORS_CONFIG: {
-        mode: 'cors',
-        credentials: 'include',
+        mode: 'cors',                      // Enable CORS
+        credentials: 'include',            // Include credentials in requests
         headers: {
             'Access-Control-Allow-Origin': window.location.origin,
             'Access-Control-Allow-Credentials': 'true'
@@ -25,12 +26,15 @@ const API_CONFIG = {
     }
 };
 
+// ApiService class for handling all API requests
 class ApiService {
+    // Get authentication headers with JWT token
     static getAuthHeaders() {
         const token = TokenService.getToken();
         return token ? { 'Authorization': `Bearer ${token}` } : {};
     }
 
+    // Generic request method for all API calls
     static async request(endpoint, options = {}) {
         const url = API_CONFIG.BASE_URL + endpoint;
         const headers = { 
@@ -46,6 +50,7 @@ class ApiService {
                 headers
             });
             
+            // Handle unauthorized access (401)
             if (response.status === 401) {
                 // Token expired or invalid
                 TokenService.removeToken();
@@ -55,6 +60,7 @@ class ApiService {
             
             const data = await response.json();
             
+            // Handle non-200 responses
             if (!response.ok) {
                 throw new Error(data.message || 'An error occurred');
             }
@@ -66,6 +72,7 @@ class ApiService {
         }
     }
     
+    // User authentication methods
     static async login(credentials) {
         return this.request(API_CONFIG.ENDPOINTS.LOGIN, {
             method: 'POST',
@@ -94,6 +101,7 @@ class ApiService {
         });
     }
     
+    // OAuth authentication method
     static async handleOAuth(provider, code) {
         return this.request(API_CONFIG.ENDPOINTS.OAUTH[provider.toUpperCase()], {
             method: 'POST',
@@ -102,20 +110,24 @@ class ApiService {
     }
 }
 
-// Token management
+// TokenService class for managing JWT tokens
 class TokenService {
+    // Get stored token from localStorage
     static getToken() {
         return localStorage.getItem('auth_token');
     }
     
+    // Store token in localStorage
     static setToken(token) {
         localStorage.setItem('auth_token', token);
     }
     
+    // Remove token from localStorage
     static removeToken() {
         localStorage.removeItem('auth_token');
     }
     
+    // Check if user is authenticated and token is valid
     static isAuthenticated() {
         const token = this.getToken();
         if (!token) return false;
@@ -130,4 +142,5 @@ class TokenService {
     }
 }
 
+// Export the configuration and service classes
 export { API_CONFIG, ApiService, TokenService };

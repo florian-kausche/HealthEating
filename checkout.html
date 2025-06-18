@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags for character encoding and viewport settings -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - HealthyEating</title>
+    
+    <!-- External CSS libraries and custom stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="checkout.css">
 </head>
 <body>
+    <!-- Main header with navigation and logo -->
     <header class="main-header">
         <div class="container header-flex">
             <div class="logo">
@@ -17,11 +21,13 @@
                     <span>HEALTHYEATING</span>
                 </a>
             </div>
+            <!-- Mobile menu toggle button -->
             <button class="hamburger" aria-label="Open menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
+            <!-- Main navigation links -->
             <nav>
                 <a href="index.html#about" class="nav-link">About</a>
                 <a href="index.html#features" class="nav-link">Features</a>
@@ -34,8 +40,10 @@
         </div>
     </header>
 
+    <!-- Main checkout content section -->
     <main class="checkout-page">
         <div class="checkout-container">
+            <!-- Checkout header with title and progress steps -->
             <div class="checkout-header">
                 <h1>Checkout</h1>
                 <div class="checkout-steps">
@@ -54,8 +62,11 @@
                 </div>
             </div>
 
+            <!-- Main checkout content grid -->
             <div class="checkout-content">
+                <!-- Checkout form section -->
                 <div class="checkout-form">
+                    <!-- Shipping information form -->
                     <h2>Shipping Information</h2>
                     <form id="shipping-form">
                         <div class="form-group">
@@ -76,8 +87,10 @@
                         </div>
                     </form>
 
+                    <!-- Payment methods section -->
                     <h2>Payment Method</h2>
                     <div class="payment-methods">
+                        <!-- Credit card payment option -->
                         <div class="payment-method" data-method="credit-card">
                             <input type="radio" name="payment" id="credit-card" value="credit-card">
                             <label for="credit-card">
@@ -85,6 +98,7 @@
                                 Credit Card
                             </label>
                         </div>
+                        <!-- Mobile money payment option -->
                         <div class="payment-method" data-method="mobile-money">
                             <input type="radio" name="payment" id="mobile-money" value="mobile-money">
                             <label for="mobile-money">
@@ -92,6 +106,7 @@
                                 Mobile Money
                             </label>
                         </div>
+                        <!-- Cash on delivery option -->
                         <div class="payment-method" data-method="cash">
                             <input type="radio" name="payment" id="cash" value="cash">
                             <label for="cash">
@@ -101,6 +116,7 @@
                         </div>
                     </div>
 
+                    <!-- Credit card payment form -->
                     <div id="credit-card-form" class="payment-form">
                         <div class="form-group">
                             <label for="card-number">Card Number</label>
@@ -118,6 +134,7 @@
                         </div>
                     </div>
 
+                    <!-- Mobile money payment form -->
                     <div id="mobile-money-form" class="payment-form" style="display: none;">
                         <div class="form-group">
                             <label for="mobile-number">Mobile Money Number</label>
@@ -133,6 +150,7 @@
                         </div>
                     </div>
 
+                    <!-- Cash on delivery form -->
                     <div id="cash-form" class="payment-form" style="display: none;">
                         <p class="cash-info">
                             <i class="fas fa-info-circle"></i>
@@ -141,6 +159,7 @@
                     </div>
                 </div>
 
+                <!-- Order summary section -->
                 <div class="order-summary">
                     <h2>Order Summary</h2>
                     <div id="checkout-items" class="checkout-items">
@@ -168,12 +187,14 @@
         </div>
     </main>
 
+    <!-- Footer section -->
     <footer>
         <div class="container copyright">
             &copy; 2025 HealthyEating
         </div>
     </footer>
 
+    <!-- JavaScript files -->
     <script src="cart.js"></script>
     <script src="checkout.js"></script>
 </body>

@@ -1,12 +1,14 @@
 // Cart functionality
+// Main Cart class to handle all shopping cart operations
 class Cart {
     constructor() {
-        this.items = [];
-        this.isLoading = false;
-        this.error = null;
-        this.init();
+        this.items = [];          // Array to store cart items
+        this.isLoading = false;   // Loading state flag
+        this.error = null;        // Error state
+        this.init();              // Initialize cart on creation
     }
 
+    // Initialize cart and load saved items
     async init() {
         try {
             this.showLoading();
@@ -19,6 +21,7 @@ class Cart {
         }
     }
 
+    // Load cart data from localStorage
     async loadCart() {
         try {
             const savedCart = localStorage.getItem('cart');
@@ -29,18 +32,21 @@ class Cart {
         }
     }
 
+    // Show loading overlay
     showLoading() {
         this.isLoading = true;
         const overlay = document.getElementById('loading-overlay');
         if (overlay) overlay.style.display = 'flex';
     }
 
+    // Hide loading overlay
     hideLoading() {
         this.isLoading = false;
         const overlay = document.getElementById('loading-overlay');
         if (overlay) overlay.style.display = 'none';
     }
 
+    // Display error message to user
     showError(message) {
         this.error = message;
         const errorElement = document.getElementById('cart-error');
@@ -54,11 +60,13 @@ class Cart {
         }
     }
 
+    // Handle errors and display them to user
     handleError(message) {
         console.error(message);
         this.showError(message);
     }
 
+    // Add item to cart
     async addItem(product) {
         try {
             this.showLoading();
@@ -82,6 +90,7 @@ class Cart {
         }
     }
 
+    // Remove item from cart
     async removeItem(title) {
         try {
             this.showLoading();
@@ -95,6 +104,7 @@ class Cart {
         }
     }
 
+    // Update item quantity in cart
     async updateQuantity(title, quantity) {
         try {
             this.showLoading();
@@ -111,6 +121,7 @@ class Cart {
         }
     }
 
+    // Clear all items from cart
     async clearCart() {
         try {
             this.showLoading();
@@ -124,6 +135,7 @@ class Cart {
         }
     }
 
+    // Save cart data to localStorage
     async saveCart() {
         try {
             localStorage.setItem('cart', JSON.stringify(this.items));
@@ -132,6 +144,7 @@ class Cart {
         }
     }
 
+    // Calculate total price of all items in cart
     getTotal() {
         return this.items.reduce((total, item) => {
             const price = parseFloat(item.price.replace('$', ''));
@@ -139,6 +152,7 @@ class Cart {
         }, 0);
     }
 
+    // Render cart items and summary to the DOM
     renderCart() {
         const cartItems = document.getElementById('cart-items');
         const cartSummary = document.getElementById('cart-summary');
@@ -157,6 +171,7 @@ class Cart {
             clearCartBtn.style.display = this.items.length > 0 ? 'flex' : 'none';
         }
 
+        // Display empty cart message if no items
         if (this.items.length === 0) {
             cartItems.innerHTML = `
                 <div class="empty-cart">
@@ -170,6 +185,7 @@ class Cart {
             return;
         }
 
+        // Render cart items
         cartItems.innerHTML = this.items.map(item => `
             <div class="cart-item" data-title="${item.title}">
                 <img src="${item.img}" alt="${item.title}" onerror="this.src='image/placeholder.jpg'">
@@ -195,6 +211,7 @@ class Cart {
             </div>
         `).join('');
 
+        // Calculate and render order summary
         const subtotal = this.getTotal();
         const shipping = subtotal > 0 ? 5.99 : 0;
         const total = subtotal + shipping;

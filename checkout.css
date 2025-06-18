@@ -1,26 +1,31 @@
+/* Main checkout page layout */
 .checkout-page {
     padding: 2rem 0;
     min-height: calc(100vh - 200px);
     background: #f7fafd;
 }
 
+/* Container for checkout content with max width */
 .checkout-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
 }
 
+/* Checkout header section */
 .checkout-header {
     margin-bottom: 2rem;
     text-align: center;
 }
 
+/* Checkout page title */
 .checkout-header h1 {
     color: #222;
     font-size: 2rem;
     margin-bottom: 1.5rem;
 }
 
+/* Progress steps navigation */
 .checkout-steps {
     display: flex;
     justify-content: center;
@@ -28,6 +33,7 @@
     margin-bottom: 2rem;
 }
 
+/* Individual step styling */
 .step {
     display: flex;
     align-items: center;
@@ -35,20 +41,24 @@
     color: #666;
 }
 
+/* Step icon styling */
 .step i {
     font-size: 1.2rem;
 }
 
+/* Active step highlighting */
 .step.active {
     color: #ff7f50;
 }
 
+/* Main checkout content grid layout */
 .checkout-content {
     display: grid;
     grid-template-columns: 1fr 400px;
     gap: 2rem;
 }
 
+/* Checkout form container */
 .checkout-form {
     background: white;
     padding: 2rem;
@@ -56,16 +66,19 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
+/* Form section title */
 .checkout-form h2 {
     color: #222;
     margin-bottom: 1.5rem;
     font-size: 1.5rem;
 }
 
+/* Form input group styling */
 .form-group {
     margin-bottom: 1.5rem;
 }
 
+/* Form label styling */
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
@@ -73,6 +86,7 @@
     font-weight: 500;
 }
 
+/* Form input fields styling */
 .form-group input,
 .form-group textarea,
 .form-group select {
@@ -84,6 +98,7 @@
     transition: border-color 0.3s ease;
 }
 
+/* Form input focus states */
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
@@ -91,18 +106,21 @@
     outline: none;
 }
 
+/* Two-column form layout */
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
 }
 
+/* Payment methods container */
 .payment-methods {
     display: grid;
     gap: 1rem;
     margin-bottom: 1.5rem;
 }
 
+/* Individual payment method option */
 .payment-method {
     display: flex;
     align-items: center;
@@ -115,17 +133,20 @@
     background: white;
 }
 
+/* Payment method hover state */
 .payment-method:hover {
     border-color: #ff7f50;
     background: #fff9f7;
 }
 
+/* Active payment method styling */
 .payment-method.active {
     border-color: #ff7f50;
     background: #fff9f7;
     box-shadow: 0 2px 8px rgba(255, 127, 80, 0.1);
 }
 
+/* Payment method radio button */
 .payment-method input[type="radio"] {
     width: 20px;
     height: 20px;
@@ -133,6 +154,7 @@
     cursor: pointer;
 }
 
+/* Payment method label */
 .payment-method label {
     display: flex;
     align-items: center;
@@ -142,15 +164,18 @@
     flex: 1;
 }
 
+/* Payment method icon */
 .payment-method i {
     font-size: 1.2rem;
     color: #666;
 }
 
+/* Active payment method icon */
 .payment-method.active i {
     color: #ff7f50;
 }
 
+/* Payment form container */
 .payment-form {
     margin-top: 1.5rem;
     padding: 1.5rem;
@@ -160,16 +185,19 @@
     display: none;
 }
 
+/* Active payment form */
 .payment-form.active {
     display: block;
     animation: fadeIn 0.3s ease;
 }
 
+/* Fade in animation */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Cash payment information */
 .cash-info {
     display: flex;
     align-items: center;
@@ -177,10 +205,12 @@
     color: #666;
 }
 
+/* Cash payment icon */
 .cash-info i {
     color: #ff7f50;
 }
 
+/* Order summary container */
 .order-summary {
     background: white;
     padding: 2rem;
@@ -190,10 +220,12 @@
     top: 2rem;
 }
 
+/* Checkout items list */
 .checkout-items {
     margin-bottom: 1.5rem;
 }
 
+/* Individual checkout item */
 .checkout-item {
     display: grid;
     grid-template-columns: 80px 1fr auto;
@@ -202,6 +234,7 @@
     border-bottom: 1px solid #eee;
 }
 
+/* Checkout item image */
 .checkout-item img {
     width: 80px;
     height: 80px;
@@ -209,29 +242,34 @@
     border-radius: 5px;
 }
 
+/* Item details title */
 .item-details h3 {
     margin: 0 0 0.5rem 0;
     font-size: 1rem;
     color: #222;
 }
 
+/* Item details description */
 .item-details p {
     margin: 0;
     color: #666;
     font-size: 0.9rem;
 }
 
+/* Item price styling */
 .item-price {
     color: #ff7f50;
     font-weight: 600;
 }
 
+/* Order summary totals section */
 .summary-totals {
     margin-top: 1.5rem;
     padding-top: 1.5rem;
     border-top: 1px solid #eee;
 }
 
+/* Summary row styling */
 .summary-row {
     display: flex;
     justify-content: space-between;
@@ -239,6 +277,7 @@
     color: #666;
 }
 
+/* Total row styling */
 .summary-row.total {
     color: #222;
     font-weight: bold;
@@ -248,6 +287,7 @@
     margin-top: 1rem;
 }
 
+/* Checkout button styling */
 .checkout-btn {
     width: 100%;
     padding: 1rem;
@@ -262,34 +302,39 @@
     margin-top: 1.5rem;
 }
 
+/* Checkout button hover state */
 .checkout-btn:hover {
     background: #ff9f73;
     transform: translateY(-2px);
 }
 
+/* Disabled checkout button */
 .checkout-btn:disabled {
     background: #ccc;
     cursor: not-allowed;
     transform: none;
 }
 
+/* Responsive styles for tablets */
 @media (max-width: 992px) {
     .checkout-content {
         grid-template-columns: 1fr;
     }
-
+    
     .order-summary {
         position: static;
+        margin-top: 2rem;
     }
 }
 
+/* Responsive styles for mobile devices */
 @media (max-width: 576px) {
     .checkout-steps {
         flex-direction: column;
         align-items: center;
         gap: 1rem;
     }
-
+    
     .form-row {
         grid-template-columns: 1fr;
     }
