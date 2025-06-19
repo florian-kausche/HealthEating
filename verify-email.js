@@ -1,26 +1,33 @@
 // verify-email.js
 import { ApiService } from './api-config.js';
 
+// Initialize email verification when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    // Extract URL parameters for verification process
     const params = new URLSearchParams(window.location.search);
-    const token = params.get('token');
-    const email = params.get('email');
-    const status = params.get('status');
+    const token = params.get('token');        // Verification token from email link
+    const email = params.get('email');        // User's email address
+    const status = params.get('status');      // Verification status (pending, success, error)
     
+    // Get DOM elements for status display and action buttons
     const statusContainer = document.getElementById('verification-status');
     const loginButton = document.querySelector('.action-button');
     
+    // Main email verification function
     async function verifyEmail() {
+        // Handle pending verification status (email sent but not clicked)
         if (status === 'pending') {
             showPending(email);
             return;
         }
         
+        // Validate required parameters
         if (!token || !email) {
             showError('Invalid verification link');
             return;
         }
         
+        // Attempt to verify email with API
         try {
             await ApiService.verifyEmail(token);
             showSuccess();
@@ -29,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
+    // Display success message when email is verified
     function showSuccess() {
         statusContainer.className = 'verification-status success';
         statusContainer.innerHTML = `
@@ -39,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loginButton.style.display = 'inline-block';
     }
     
+    // Display error message when verification fails
     function showError(message) {
         statusContainer.className = 'verification-status error';
         statusContainer.innerHTML = `
@@ -49,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loginButton.style.display = 'inline-block';
     }
     
+    // Display pending message when waiting for email verification
     function showPending(email) {
         statusContainer.className = 'verification-status pending';
         statusContainer.innerHTML = `
@@ -60,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loginButton.style.display = 'none';
     }
     
+    // Global function to resend verification email
     window.resendVerification = async (email) => {
         try {
             await ApiService.signup({ email, resendVerification: true });
@@ -69,6 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
-    // Start verification process
+    // Start the verification process when page loads
     verifyEmail();
 });

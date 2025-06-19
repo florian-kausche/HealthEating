@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags for character encoding and responsive viewport -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Confirmation - HealthyEating</title>
+    <!-- External CSS libraries and custom stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="confirmation.css">
 </head>
 <body>
+    <!-- Main header with navigation and logo -->
     <header class="main-header">
         <div class="container header-flex">
+            <!-- Logo and brand name -->
             <div class="logo">
                 <a href="index.html">
                     <img src="image/Healthyeating-logo.png" alt="Healthy Eating Logo" class="logo-img"> 
                     <span>HEALTHYEATING</span>
                 </a>
             </div>
+            <!-- Mobile menu hamburger button -->
             <button class="hamburger" aria-label="Open menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
+            <!-- Main navigation menu -->
             <nav>
                 <a href="index.html#about" class="nav-link">About</a>
                 <a href="index.html#features" class="nav-link">Features</a>
@@ -34,22 +40,29 @@
         </div>
     </header>
 
+    <!-- Main confirmation content -->
     <main class="confirmation-page">
         <div class="confirmation-container">
+            <!-- Confirmation header with success icon and order details -->
             <div class="confirmation-header">
+                <!-- Success icon with animation -->
                 <div class="success-icon">
                     <i class="fas fa-check-circle"></i>
                 </div>
+                <!-- Order confirmation title and order information -->
                 <h1>Order Confirmed!</h1>
                 <p class="order-number">Order #<span id="order-number"></span></p>
                 <p class="order-date" id="order-date"></p>
             </div>
 
+            <!-- Main confirmation content sections -->
             <div class="confirmation-content">
                 <div class="confirmation-details">
+                    <!-- Thank you message and order status progress -->
                     <div class="detail-section">
                         <h2>Thank You for Your Order</h2>
                         <p>Your order has been successfully placed and is being processed. You will receive a confirmation email shortly.</p>
+                        <!-- Order status progress bar -->
                         <div class="order-status">
                             <div class="status-step active">
                                 <i class="fas fa-check-circle"></i>
@@ -70,11 +83,14 @@
                         </div>
                     </div>
 
+                    <!-- Order summary with items and totals -->
                     <div class="detail-section">
                         <h3>Order Summary</h3>
+                        <!-- Dynamic order items container -->
                         <div id="order-items" class="order-items">
                             <!-- Order items will be dynamically inserted here -->
                         </div>
+                        <!-- Order totals breakdown -->
                         <div class="order-totals">
                             <div class="total-row">
                                 <span>Subtotal</span>
@@ -95,20 +111,25 @@
                         </div>
                     </div>
 
+                    <!-- Shipping information section -->
                     <div class="detail-section">
                         <h3>Shipping Information</h3>
+                        <!-- Dynamic shipping info container -->
                         <div id="shipping-info" class="shipping-info">
                             <!-- Shipping information will be dynamically inserted here -->
                         </div>
                     </div>
 
+                    <!-- Payment information section -->
                     <div class="detail-section">
                         <h3>Payment Information</h3>
+                        <!-- Dynamic payment info container -->
                         <div id="payment-info" class="payment-info">
                             <!-- Payment information will be dynamically inserted here -->
                         </div>
                     </div>
 
+                    <!-- Next steps guidance for customer -->
                     <div class="next-steps">
                         <h3>What's Next?</h3>
                         <ul>
@@ -120,6 +141,7 @@
                     </div>
                 </div>
 
+                <!-- Action buttons for user interactions -->
                 <div class="confirmation-actions">
                     <a href="index.html" class="btn primary-btn">
                         <i class="fas fa-home"></i> Return to Home
@@ -135,14 +157,17 @@
         </div>
     </main>
 
+    <!-- Footer section -->
     <footer>
         <div class="container copyright">
             &copy; 2025 HealthyEating
         </div>
     </footer>
 
+    <!-- External JavaScript libraries for PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Custom confirmation page JavaScript -->
     <script src="confirmation.js"></script>
 </body>
 </html> 

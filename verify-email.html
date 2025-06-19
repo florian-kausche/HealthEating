@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags for character encoding and responsive viewport -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify Email - HealthyEating</title>
+    <!-- External CSS libraries and custom stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* Page background and centering for verification */
         .verify-page {
             min-height: 100vh;
             background: linear-gradient(135deg, #6b46c1, #805ad5);
@@ -16,6 +19,7 @@
             padding: 2rem;
         }
 
+        /* Container for verification card */
         .verify-container {
             background: white;
             border-radius: 20px;
@@ -26,6 +30,7 @@
             text-align: center;
         }
 
+        /* Header with logo and title */
         .verify-header img {
             width: 120px;
             margin-bottom: 1rem;
@@ -37,6 +42,7 @@
             margin: 0 0 1rem;
         }
 
+        /* Status message box styling */
         .verification-status {
             margin: 2rem 0;
             padding: 2rem;
@@ -61,6 +67,7 @@
             color: #ed8936;
         }
 
+        /* Action button styling */
         .action-button {
             background: #6b46c1;
             color: white;
@@ -82,14 +89,17 @@
     </style>
 </head>
 <body>
+    <!-- Main header with navigation and logo -->
     <header class="main-header">
         <div class="container header-flex">
+            <!-- Logo and brand name -->
             <div class="logo">
                 <a href="index.html">
                     <img src="image/Healthyeating-logo.png" alt="Healthy Eating Logo" class="logo-img"> 
                     <span>HEALTHYEATING</span>
                 </a>
             </div>            
+            <!-- Main navigation menu -->
             <nav>
                 <a href="index.html#about" class="nav-link">About</a>
                 <a href="index.html#features" class="nav-link">Features</a>
@@ -102,25 +112,31 @@
             </nav>
         </div>
     </header>
+    <!-- Main verification content -->
     <div class="verify-page">
+        <!-- Card container for verification status -->
         <div class="verify-container">
+            <!-- Header with logo and title -->
             <div class="verify-header">
                 <img src="image/Healthyeating-logo.png" alt="HealthyEating Logo">
                 <h1>Email Verification</h1>
             </div>
             
+            <!-- Status message area (pending, success, or error) -->
             <div id="verification-status" class="verification-status pending">
                 <i class="fas fa-spinner fa-spin"></i>
                 <h2>Verifying your email...</h2>
                 <p>Please wait while we verify your email address.</p>
             </div>
             
+            <!-- Button to return to login (shown after verification) -->
             <a href="login.html" class="action-button" style="display: none;">
                 Return to Login
             </a>
         </div>
     </div>
 
+    <!-- Email verification JavaScript -->
     <script type="module" src="verify-email.js"></script>
 </body>
 </html>

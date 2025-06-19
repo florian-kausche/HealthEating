@@ -2,6 +2,5 @@
   // Custom words for spell checking
   "cSpell.words": ["HEALTHYEATING", "intolerances"],
   // Port for the live server
-  "liveServer.settings.port": 5503
+  "liveServer.settings.port": 5504
 }
-  

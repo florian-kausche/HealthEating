@@ -119,7 +119,7 @@ class AuthManager {
                 throw new Error(`${platform} login is not configured`);
             }
             
-            // Create and store state parameter to prevent CSRF
+            // Create and store state parameter 
             const state = this.generateRandomState();
             sessionStorage.setItem('oauth_state', state);
             

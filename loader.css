@@ -1,9 +1,11 @@
+/* Body styling for loader page background */
 body {
   margin: 0;
   padding: 0;
   background: #262626;
 }
 
+/* Main loader container with positioning and animation */
 .loader {
   position: absolute;
   top: 50%;
@@ -14,6 +16,7 @@ body {
   animation: animate 1s linear infinite;
 }
 
+/* Individual loader item styling and positioning */
 .loader-item {
   position: absolute;
   width: 50px;
@@ -23,30 +26,35 @@ body {
   animation: rotate 1s linear infinite;
 }
 
+/* Top-left loader item with orange color */
 .loader-item_1 {
   top: 0;
   left: 0;
   background: #f79f1f;
 }
 
+/* Top-right loader item with cyan color */
 .loader-item_2 {
   top: 0;
   right: 0;
   background: #12cbc4;
 }
 
+/* Bottom-left loader item with red color */
 .loader-item_3 {
   bottom: 0;
   left: 0;
   background: #ed4c67;
 }
 
+/* Bottom-right loader item with green color */
 .loader-item_4 {
   bottom: 0;
   right: 0;
   background: #a3cb38;
 }
 
+/* Animation for the main loader container - scaling effect */
 @keyframes animate {
   0% {
     width: 100px;
@@ -70,6 +78,7 @@ body {
   }
 }
 
+/* Animation for individual loader items - rotation effect */
 @keyframes rotate {
   0% {
     transform: rotate(0deg);

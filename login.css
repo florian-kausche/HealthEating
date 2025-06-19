@@ -1,3 +1,4 @@
+/* Background video styling for login page */
 #bg-video {
     position: fixed;
     top: 0;
@@ -9,6 +10,7 @@
     pointer-events: none;
 }
 
+/* Video overlay for better text readability */
 .video-overlay {
     position: fixed;
     top: 0;
@@ -20,6 +22,7 @@
     pointer-events: none;
 }
 
+/* Base body styling for login page */
 body {
     margin: 0;
     padding: 0;
@@ -29,6 +32,7 @@ body {
     color: #222;
 }
 
+/* Main login page container with centering */
 .login-page {
     min-height: 100vh;
     display: flex;
@@ -39,6 +43,7 @@ body {
     z-index: 1;
 }
 
+/* Login form container with glassmorphism effect */
 .login-container {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
@@ -51,38 +56,45 @@ body {
     backdrop-filter: blur(10px);
 }
 
+/* Login header section with logo and title */
 .login-header {
     text-align: center;
     margin-bottom: 2rem;
 }
 
+/* Logo image styling */
 .login-header img {
     width: 120px;
     margin-bottom: 1rem;
 }
 
+/* Main heading styling */
 .login-header h1 {
     color: #222;
     font-size: 1.75rem;
     margin: 0;
 }
 
+/* Subtitle text styling */
 .login-header p {
     color: #666;
     margin-top: 0.5rem;
 }
 
+/* Login form container with flexbox layout */
 .login-form {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
+/* Form group container styling */
 .login-form .form-group {
     margin-bottom: 1.5rem;
     width: 100%;
 }
 
+/* Input field styling for email and password */
 .login-form input[type="email"],
 .login-form input[type="password"] {
     width: 100%;
@@ -96,12 +108,14 @@ body {
     display: block;
 }
 
+/* Input focus state styling */
 .login-form input:focus {
     border-color: #ff7f50;
     box-shadow: 0 0 0 3px rgba(255, 127, 80, 0.1);
     outline: none;
 }
 
+/* Icon positioning within form groups */
 .login-form .form-group i {
     position: absolute;
     left: 1rem;
@@ -111,20 +125,24 @@ body {
     font-size: 1.1rem;
 }
 
+/* Hide form labels for cleaner design */
 .login-form label {
     display: none;
 }
 
+/* Form group positioning for icons */
 .login-form .form-group {
     position: relative;
 }
 
+/* Full-width button styling */
 .login-form .product-btn,
 .login-form button,
 .login-form input[type="submit"] {
     width: 100%;
 }
 
+/* Remember me and forgot password section */
 .remember-forgot {
     display: flex;
     justify-content: space-between;
@@ -132,6 +150,7 @@ body {
     font-size: 0.875rem;
 }
 
+/* Remember me checkbox styling */
 .remember-me {
     display: flex;
     align-items: center;
@@ -139,16 +158,19 @@ body {
     color: #666;
 }
 
+/* Forgot password link styling */
 .forgot-password {
     color: #ff7f50;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
+/* Forgot password hover effect */
 .forgot-password:hover {
     color: #ff9f73;
 }
 
+/* Main login button styling */
 .login-button {
     background: #ff7f50;
     color: white;
@@ -161,23 +183,27 @@ body {
     font-weight: 600;
 }
 
+/* Login button hover effect */
 .login-button:hover {
     background: #ff9f73;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 127, 80, 0.15);
 }
 
+/* Social login section */
 .social-login {
     margin-top: 2rem;
     text-align: center;
 }
 
+/* Social login divider text */
 .social-login p {
     color: #666;
     margin-bottom: 1rem;
     position: relative;
 }
 
+/* Social login divider lines */
 .social-login p::before,
 .social-login p::after {
     content: "";
@@ -188,20 +214,24 @@ body {
     background: #e2e8f0;
 }
 
+/* Left divider line */
 .social-login p::before {
     left: 0;
 }
 
+/* Right divider line */
 .social-login p::after {
     right: 0;
 }
 
+/* Social buttons container */
 .social-buttons {
     display: flex;
     gap: 1rem;
     justify-content: center;
 }
 
+/* Individual social button styling */
 .social-button {
     width: 40px;
     height: 40px;
@@ -215,6 +245,7 @@ body {
     background: white;
 }
 
+/* Social button hover effect */
 .social-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -222,22 +253,26 @@ body {
     color: #ff7f50;
 }
 
+/* Sign up link section */
 .signup-link {
     text-align: center;
     margin-top: 2rem;
     color: #666;
 }
 
+/* Sign up link styling */
 .signup-link a {
     color: #ff7f50;
     text-decoration: none;
     font-weight: 600;
 }
 
+/* Sign up link hover effect */
 .signup-link a:hover {
     color: #ff9f73;
 }
 
+/* Authentication error message styling */
 .auth-error {
     background: #ffe3d6;
     color: #ff7f50;
@@ -248,11 +283,13 @@ body {
     animation: fadeIn 0.3s ease;
 }
 
+/* Fade in animation for error messages */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Responsive design for tablets */
 @media (max-width: 900px) {
   .login-container {
     max-width: 98vw;
@@ -262,6 +299,8 @@ body {
     font-size: 1.3rem;
   }
 }
+
+/* Responsive design for mobile devices */
 @media (max-width: 700px) {
   .login-container {
     max-width: 99vw;
@@ -275,6 +314,8 @@ body {
     padding: 0.7rem;
   }
 }
+
+/* Responsive design for small mobile devices */
 @media (max-width: 480px) {
   .login-container {
     max-width: 100vw;

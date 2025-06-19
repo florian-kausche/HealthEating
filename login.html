@@ -1,34 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags for character encoding and responsive viewport -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - HealthyEating</title>
+    <!-- External CSS libraries and custom stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <!-- Video Background -->
+    <!-- Video background for enhanced visual appeal -->
     <video autoplay muted loop playsinline id="bg-video">
         <source src="image/food-video.webm" type="video/webm">
         <source src="image/food-video.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
+    <!-- Video overlay for better text readability -->
     <div class="video-overlay"></div>
+    
+    <!-- Main header with navigation and logo -->
     <header class="main-header">
         <div class="container header-flex">
+            <!-- Logo and brand name -->
             <div class="logo">
                 <a href="index.html">
                     <img src="image/Healthyeating-logo.png" alt="Healthy Eating Logo" class="logo-img"> 
                     <span>HEALTHYEATING</span>
                 </a>
             </div>
+            <!-- Mobile menu hamburger button -->
             <button class="hamburger" aria-label="Open menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
+            <!-- Main navigation menu -->
             <nav>
                 <a href="index.html#about" class="nav-link">About</a>
                 <a href="index.html#features" class="nav-link">Features</a>
@@ -40,25 +48,33 @@
             </nav>
         </div>
     </header>
+    
+    <!-- Main login page content -->
     <div class="login-page">
+        <!-- Login form container with glassmorphism effect -->
         <div class="login-container">
+            <!-- Login header with logo and welcome message -->
             <div class="login-header">
                 <img src="image/Healthyeating-logo.png" alt="HealthyEating Logo">
                 <h1>Welcome Back!</h1>
                 <p>Enter your credentials to access your account</p>
             </div>
             
+            <!-- Login form with email and password fields -->
             <form class="login-form" id="login-form">
+                <!-- Email input field with icon -->
                 <div class="form-group">
                     <i class="fas fa-envelope"></i>
                     <input type="email" id="email" placeholder="Email address" required>
                 </div>
                 
+                <!-- Password input field with icon -->
                 <div class="form-group">
                     <i class="fas fa-lock"></i>
                     <input type="password" id="password" placeholder="Password" required>
                 </div>
                 
+                <!-- Remember me checkbox and forgot password link -->
                 <div class="remember-forgot">
                     <label class="remember-me">
                         <input type="checkbox" id="remember">
@@ -67,11 +83,14 @@
                     <a href="#" class="forgot-password">Forgot password?</a>
                 </div>
                 
+                <!-- Login submit button -->
                 <button type="submit" class="login-button">Sign In</button>
             </form>
             
+            <!-- Social login section with alternative login options -->
             <div class="social-login">
                 <p>Or continue with</p>
+                <!-- Social media login buttons -->
                 <div class="social-buttons">
                     <div class="social-button">
                         <i class="fab fa-google"></i>
@@ -85,12 +104,14 @@
                 </div>
             </div>
             
+            <!-- Sign up link for new users -->
             <div class="signup-link">
                 Don't have an account? <a href="signup.html">Sign up</a>
             </div>
         </div>
     </div>
 
+    <!-- Custom login page JavaScript -->
     <script type="module" src="login.js"></script>
 </body>
 </html>
