@@ -1,0 +1,29 @@
+{
+  "name": "health-advisor-backend",
+  "version": "1.0.0",
+  "description": "Backend for the Health Advisor Ghana platform",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test": "jest --coverage --detectOpenHandles",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.1",
+    "express": "^4.17.1",
+    "firebase-admin": "^13.4.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.16.2"
+  },
+  "devDependencies": {
+    "jest": "^30.0.4",
+    "nodemon": "^2.0.15",
+    "supertest": "^7.1.2"
+  },
+  "author": "",
+  "license": "ISC"
+}

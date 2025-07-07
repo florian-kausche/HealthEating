@@ -1,0 +1,42 @@
+{
+  "appName": "Ayaresa Afotufo GH",
+  "nav": {
+    "home": "Fie",
+    "findClinic": "Hwehwɛ Ayaresabea",
+    "healthHub": "Ayaresa Mmeaɛ",
+    "dashboard": "M'akontaabu",
+    "symptomChecker": "Nsɛnkyerɛnne Nhwehwɛmu",
+    "chatbot": "Ayaresa Oboafoɔ",
+    "adminPanel": "Soɛmfoɔ Mmeaɛ",
+    "login": "Kɔ mu",
+    "register": "Kyerɛw Wo Din",
+    "logout": "Pue"
+  },
+  "auth": {
+    "loginTitle": "Kɔ mu",
+    "registerTitle": "Kyerɛw Wo Din",
+    "emailLabel": "Email Adrɛɛse",
+    "passwordLabel": "Asɛmfua Ahuntadeɛ",
+    "fullNameLabel": "Din Muu",
+    "loggedInAs": "Wo kɔ mu sɛ: {{name}}"
+  },
+  "home": {
+    "welcomeMessage": "Akwaaba kɔ Ayaresa Afotufo GH",
+    "welcomeSubtitle": "W'apɔwmuden akwantuo hyɛ aseɛ wɔ ha. Fa AI mfiridwuma di dwuma hwehwɛ nsɛnkyerɛnne mu, pɛ ayaresabea, ne yɛn ayaresa oboafoɔ nkɔmmɔ, na sua apɔwmuden ho afotusɛm.",
+    "loggedInMessage": "Wo kɔ mu sɛ {{name}}.",
+    "guestMessage": "Yɛsrɛ wo <1>kɔ mu</1> anaasɛ <3>kyerɛw wo din</3> na woatumi adi dwuma nyinaa."
+  },
+  "common": {
+    "loading": "Ɛretɔ...",
+    "error": "Mfomsoɔ",
+    "submit": "Mena",
+    "send": "Mena",
+    "search": "Hwehwɛ",
+    "goDashboard": "Kɔ Akontaabu Mmeaɛ"
+  },
+  "languages": {
+    "english": "Borɔfo",
+    "twi": "Twi"
+  },
+  "languageSwitcher": "Sesa Kasa"
+}

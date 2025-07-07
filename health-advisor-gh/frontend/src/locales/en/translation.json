@@ -1,0 +1,42 @@
+{
+  "appName": "Health Advisor GH",
+  "nav": {
+    "home": "Home",
+    "findClinic": "Find a Clinic",
+    "healthHub": "Health Hub",
+    "dashboard": "Dashboard",
+    "symptomChecker": "Symptom Checker",
+    "chatbot": "Chatbot",
+    "adminPanel": "Admin Panel",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "auth": {
+    "loginTitle": "Login",
+    "registerTitle": "Register",
+    "emailLabel": "Email Address",
+    "passwordLabel": "Password",
+    "fullNameLabel": "Full Name",
+    "loggedInAs": "Logged in as: {{name}}"
+  },
+  "home": {
+    "welcomeMessage": "Welcome to Health Advisor Ghana",
+    "welcomeSubtitle": "Your journey to better health starts here. Access AI-powered symptom checks, find clinics, chat with our health bot, and explore health tips.",
+    "loggedInMessage": "You are logged in as {{name}}.",
+    "guestMessage": "Please <1>login</1> or <3>register</3> to access all features."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "submit": "Submit",
+    "send": "Send",
+    "search": "Search",
+    "goDashboard": "Go to Dashboard"
+  },
+  "languages": {
+    "english": "English",
+    "twi": "Twi"
+  },
+  "languageSwitcher": "Switch Language"
+}
